@@ -80,8 +80,8 @@ echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
 install libwrap.a $RPM_BUILD_ROOT%{_libdir}
-install tcpd.h $RPM_BUILD_ROOT/usr/include
-install -s safe_finger tcpd tcpdchk tcpdmatch try-from $RPM_BUILD_ROOT/usr/sbin
+install tcpd.h $RPM_BUILD_ROOT%{_includedir}
+install -s safe_finger tcpd tcpdchk tcpdmatch try-from $RPM_BUILD_ROOT%{_sbindir}
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	BLURB CHANGES README* DISCLAIMER
@@ -102,11 +102,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(750,root,bin) %dir /etc/tcpd
 %attr(440,root,bin) %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
 %{_mandir}/man[58]/*
-%attr(755,root,root) /usr/sbin/*
+%attr(755,root,root) %{_sbindir}/*
 
 %files -n libwrap
 %defattr(644,root,root,755)
-/usr/include/tcpd.h
+%{_includedir}/tcpd.h
 %{_libdir}/libwrap.a
 %{_mandir}/man3/*
 
