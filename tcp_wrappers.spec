@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	24
+Release:	25
 License:	distributable
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
@@ -20,9 +20,10 @@ Patch3:		%{name}-bug17795.patch
 Patch4:		%{name}-bug17847.patch
 Patch5:		%{name}-fixgethostbyname.patch
 Patch6:		%{name}-alarm.patch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Patch6:		%{name}-man_fixes.patch
 BuildRequires:	libtool
 Requires:	libwrap
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 With this package you can monitor and filter incoming requests for the
@@ -121,6 +122,7 @@ pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 %{__make} linux CC="%{__cc}"
