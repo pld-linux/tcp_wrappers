@@ -1,28 +1,73 @@
---- tcp_wrappers_7.6/rfc931.c~	Thu Apr 19 14:07:22 2001
-+++ tcp_wrappers_7.6/rfc931.c	Thu Apr 19 14:09:01 2001
-@@ -92,6 +92,7 @@
+diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
+--- tcp_wrappers_7.6/rfc931.c	Thu Apr 26 15:42:26 2001
++++ tcp_wrappers_7.6.alarm/rfc931.c	Thu Apr 26 15:41:53 2001
+@@ -20,7 +20,6 @@
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+-#include <setjmp.h>
+ #include <signal.h>
+ #include <string.h>
+ 
+@@ -33,7 +32,7 @@
+ 
+ int     rfc931_timeout = RFC931_TIMEOUT;/* Global so it can be changed */
+ 
+-static sigjmp_buf timebuf;
++struct sigaction oldact;
+ 
+ /* fsocket - open stdio stream on top of socket */
+ 
+@@ -59,10 +58,9 @@
+ 
+ /* timeout - handle timeouts */
+ 
+-static void timeout(sig)
+-int     sig;
++static void timeout(int signum)
+ {
+-    siglongjmp(timebuf, sig);
++	sigaction(SIGALRM,&oldact,NULL);
+ }
+ 
+ /* rfc931 - return remote user name, given socket structures */
+@@ -92,6 +90,8 @@
      char   *cp;
      char   *result = unknown;
      FILE   *fp;
 +    int    old_alarm;
++    struct sigaction act;
  
  #ifdef INET6
      /* address family must be the same */
-@@ -135,7 +136,7 @@
+@@ -133,9 +133,17 @@
+ 	 * Set up a timer so we won't get stuck while waiting for the server.
+ 	 */
  
- 	if (sigsetjmp(timebuf,1) == 0) {
- 	    signal(SIGALRM, timeout);
+-	if (sigsetjmp(timebuf,1) == 0) {
+-	    signal(SIGALRM, timeout);
 -	    alarm(rfc931_timeout);
-+	    old_alarm = alarm(rfc931_timeout);
++	act.sa_handler = timeout;
++	sigemptyset(&act.sa_mask);
++	act.sa_flags = 0;
++#ifdef SA_INTERRUPT
++	act.sa_flags |= SA_INTERRUPT;
++#endif
++	sigaction(SIGALRM,&act,&oldact);
++#ifdef HAVE_SIGINTERRUPT
++	siginterrupt(SIGALRM,1);
++#endif
++	old_alarm = alarm(rfc931_timeout);
  
  	    /*
  	     * Bind the local and remote ends of the query socket to the same
-@@ -221,7 +222,7 @@
+@@ -221,8 +229,7 @@
  		    result = user;
  		}
  	    }
 -	    alarm(0);
-+	    alarm(old_alarm);
- 	}
+-	}
++	alarm(old_alarm);
  	fclose(fp);
      }
+     STRN_CPY(dest, result, STRING_LENGTH);
