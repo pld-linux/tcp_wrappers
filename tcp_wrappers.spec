@@ -15,8 +15,9 @@ Source2:	hosts.deny
 Patch0:		tcp_wrappers-config.patch
 Patch1:		tcp_wrappers-inet_dir.patch
 Patch2:		tcp_wrappers-doc_fix.patch
-Patch3:		tcp_wrappers-ipv6.patch
-Patch4:		tcp_wrappers-debian.patch
+Patch3:		tcp_wrappers_7.6-ipv6-1.0-PLD.patch
+Patch4:		tcp_wrappers_7.6-linux-ipv6.patch
+Patch5:		tcp_wrappers-debian.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	libwrap
 
@@ -96,9 +97,10 @@ zale¿nie od ustawionej regu³ki.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
-make linux RPM_OPT_FLAGS="$RPM_OPT_FLAGS -DINET6"
+make linux
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -157,8 +159,8 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcp_wrappers.spec,v $
-Revision 1.15  1999-07-05 09:16:13  misiek
-shared libwrap and updated heimdal
+Revision 1.16  1999-07-09 10:41:38  misiek
+new ipv6 patch
 
 
 
