@@ -20,7 +20,7 @@ Patch3:		%{name}-bug17795.patch
 Patch4:		%{name}-bug17847.patch
 Patch5:		%{name}-fixgethostbyname.patch
 Patch6:		%{name}-alarm.patch
-Patch6:		%{name}-man_fixes.patch
+Patch7:		%{name}-man_fixes.patch
 BuildRequires:	libtool
 Requires:	libwrap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
