@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	20
+Release:	21
 License:	Distributable
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
