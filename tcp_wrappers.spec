@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	19
+Release:	20
 License:	Distributable
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
@@ -19,6 +19,7 @@ Patch2:		%{name}-bug11881.patch
 Patch3:		%{name}-bug17795.patch
 Patch4:		%{name}-bug17847.patch
 Patch5:		%{name}-fixgethostbyname.patch
+Patch6:		%{name}-alarm.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	libtool
 Requires:	libwrap
@@ -110,6 +111,7 @@ pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 %{__make} linux
