@@ -15,6 +15,7 @@ Patch0:		tcp_wrappers-config.patch
 Patch1:		tcp_wrappers-inet_dir.patch
 Patch2:		tcp_wrappers-doc_fix.patch
 Patch3:		tcp_wrappers-ipv6.patch
+Patch4:		tcp_wrappers-setenv.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -59,6 +60,7 @@ zale¿nie od ustawionej regu³ki.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 make linux RPM_OPT_FLAGS="$RPM_OPT_FLAGS -DINET6"
