@@ -9,7 +9,7 @@ Summary(tr):	TCP sЭreГleri iГin gЭvenlik sarmalayЩcЩsЩ
 Summary(uk):	Security wrapper для tcp-демон╕в
 Name:		tcp_wrappers
 Version:	7.6
-Release:	29
+Release:	30
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -74,6 +74,7 @@ Summary(ru):	Security wrapper для tcp-демонов. Библиотеки разработчика и хедера
 Summary(uk):	Security wrapper для tcp-демон╕в. Б╕бл╕отеки програм╕ста та хедери
 Group:		Libraries
 Requires(post):	/sbin/ldconfig
+Conflicts:	%{name} < 7.6-28
 
 %description -n libwrap
 Security wrapper access control library which implement a rule-based
