@@ -9,7 +9,7 @@ Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Summary(uk):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎ¦×
 Name:		tcp_wrappers
 Version:	7.6
-Release:	29
+Release:	30
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -23,6 +23,7 @@ Patch4:		%{name}-bug17847.patch
 Patch5:		%{name}-fixgethostbyname.patch
 Patch6:		%{name}-alarm.patch
 Patch7:		%{name}-man_fixes.patch
+Patch8:		%{name}-weak-severity.patch
 BuildRequires:	libtool
 Requires:	libwrap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -166,6 +167,7 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ÔÁ ¦ÎÛÉÈ
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 %build
 %{__make} linux CC="%{__cc}"
