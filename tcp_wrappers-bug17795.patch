@@ -1,0 +1,55 @@
+diff -Nru tcp_wrappers_7.6/hosts_access.5 tcp_wrappers_7.6.new/hosts_access.5
+--- tcp_wrappers_7.6/hosts_access.5	Thu Feb  8 07:42:23 2001
++++ tcp_wrappers_7.6.new/hosts_access.5	Thu Feb  8 07:44:42 2001
+@@ -96,6 +96,12 @@
+ address. For example, the [net]/prefixlen pattern
+ `[3ffe:505:2:1::]/64\' matches every address in the range
+ `3ffe:505:2:1::\' through `3ffe:505:2:1:ffff:ffff:ffff:ffff\'.
++A string that begins with a `/\' character is treated as a file
++name. A host name or address is matched if it matches any host name
++or address pattern listed in the named file. The file format is
++zero or more lines with zero or more host name or address patterns
++separated by whitespace.  A file name pattern can be used anywhere
++a host name or address pattern can be used.
+ .SH WILDCARDS
+ The access control language supports explicit wildcards:
+ .IP ALL
+diff -Nru tcp_wrappers_7.6/hosts_access.c tcp_wrappers_7.6.new/hosts_access.c
+--- tcp_wrappers_7.6/hosts_access.c	Thu Feb  8 07:42:23 2001
++++ tcp_wrappers_7.6.new/hosts_access.c	Thu Feb  8 07:41:30 2001
+@@ -253,6 +253,26 @@
+     }
+ }
+ 
++/* hostfile_match - look up host patterns from file */
++
++static int hostfile_match(path, host)
++char   *path;
++struct hosts_info *host;
++{
++    char    tok[BUFSIZ];
++    int     match = NO;
++    FILE   *fp;
++
++    if ((fp = fopen(path, "r")) != 0) {
++	while (fscanf(fp, "%s", tok) == 1 && !(match = host_match(tok, host)))
++	     /* void */ ;
++	fclose(fp);
++    } else if (errno != ENOENT) {
++	tcpd_warn("open %s: %m", path);
++    }
++    return (match);
++}
++
+ /* host_match - match host name and/or address against pattern */
+ 
+ static int host_match(tok, host)
+@@ -280,6 +300,8 @@
+ 	tcpd_warn("netgroup support is disabled");	/* not tcpd_jump() */
+ 	return (NO);
+ #endif
++    } else if (tok[0] == '/') {			/* /file hack */
++	return (hostfile_match(tok, host));
+     } else if (STR_EQ(tok, "KNOWN")) {		/* check address and name */
+ 	char   *name = eval_hostname(host);
+ 	return (STR_NE(eval_hostaddr(host), unknown) && HOSTNAME_KNOWN(name));
