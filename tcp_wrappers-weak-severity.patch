@@ -1,0 +1,41 @@
+--- tcp-wrappers-7.6-ipv6.1.orig/tcpd.h
++++ tcp-wrappers-7.6-ipv6.1/tcpd.h
+@@ -156,8 +179,14 @@
+ 
+ /* Global variables. */
+ 
++#ifndef DONTHAVE_WEAKSYMS
++extern int allow_severity __attribute__ ((weak)); /* for connection logging */
++extern int deny_severity __attribute__ ((weak)); /* for connection logging */
++#else
+ extern int allow_severity;		/* for connection logging */
+ extern int deny_severity;		/* for connection logging */
++#endif
++
+ extern char *hosts_allow_table;		/* for verification mode redirection */
+ extern char *hosts_deny_table;		/* for verification mode redirection */
+ extern int hosts_access_verbose;	/* for verbose matching mode */
+--- tcp-wrappers-7.6-ipv6.1.orig/Makefile
++++ tcp-wrappers-7.6-ipv6.1/Makefile
+@@ -899,5 +969,6 @@
+ update.o: mystdarg.h
+ update.o: tcpd.h
+ vfprintf.o: cflags
++weak_symbols.o: tcpd.h
+ workarounds.o: cflags
+ workarounds.o: tcpd.h
+--- tcp-wrappers-7.6-ipv6.1.orig/weak_symbols.c
++++ tcp-wrappers-7.6-ipv6.1/weak_symbols.c
+@@ -0,0 +1,11 @@
++ /*
++  * @(#) weak_symbols.h 1.5 99/12/29 23:50
++  * 
++  * Author: Anthony Towns <ajt@debian.org>
++  */
++
++#ifndef DONTHAVE_WEAKSYMS
++#include <syslog.h>
++int deny_severity = LOG_WARNING;
++int allow_severity = SEVERITY; 
++#endif
+
