@@ -22,7 +22,7 @@ diff -Nru tcp_wrappers_7.6/README tcp_wrappers_7.6.new/README
  
 -    finger  stream  tcp     nowait  nobody  /usr/etc/tcpd           in.fingerd
 -                                            ^^^^^^^^^^^^^
-+    finger  stream  tcp     nowait  nobody  /usr/snin/tcpd           in.fingerd
++    finger  stream  tcp     nowait  nobody  /usr/sbin/tcpd           in.fingerd
 +                                            ^^^^^^^^^^^^^^
  Send a `kill -HUP' to the inetd process to make the change effective.
  Some IRIX inetd implementations require that you first disable the
