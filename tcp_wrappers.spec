@@ -159,7 +159,11 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcp_wrappers.spec,v $
-Revision 1.17  1999-07-09 10:51:45  misiek
+Revision 1.18  1999-07-09 16:22:14  kloczek
+
+- added line on top spec file with cvs tags ($Revision:$ and $Date:$).
+
+Revision 1.17  1999/07/09 10:51:45  misiek
 fixed permissions on /etc/tcpd/*
 
 Revision 1.16  1999/07/09 10:41:38  misiek
