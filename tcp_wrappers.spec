@@ -97,14 +97,14 @@ wykowywanymi zale¿nie od ustawionej regu³ki.
 %patch1 -p1
 
 %build
-make linux
+%{__make} linux
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/tcpd \
 	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir},%{_includedir},%{_sbindir}}
 
-make install \
+%{__make} install \
 	PREFIX=$RPM_BUILD_ROOT%{_prefix}
 
 install	hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
