@@ -26,7 +26,7 @@ Patch6:		%{name}-alarm.patch
 Patch7:		%{name}-man_fixes.patch
 Patch8:		%{name}-weak-severity.patch
 BuildRequires:	libtool
-Requires:	libwrap
+Requires:	libwrap = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,9 +45,9 @@ pour SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et
 autres services réseau.
 
 %description -l pl
-Z tym pakietem mo¿esz monitorowaæ i filtrowaæ nadchodz±ce pro¶by do
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych
-us³ug sieciowych.
+Przy pomocy tego pakietu mo¿na monitorowaæ i filtrowaæ nadchodz±ce
+¿±dania SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK i
+innych us³ug sieciowych.
 
 %description -l pt_BR
 Com este pacote você pode monitorar e filtrar chamadas de SYSTAT,
@@ -71,12 +71,13 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ÔÁ ¦ÎÛÉÈ
 
 %package -n libwrap
 Summary:	Security wrapper access control library
-Summary(pl):	Biblioteki wrappera bezpieczeñstwa
+Summary(pl):	Biblioteka wrappera bezpieczeñstwa
 Summary(ru):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎÏ×. âÉÂÌÉÏÔÅËÉ ÒÁÚÒÁÂÏÔŞÉËÁ É ÈÅÄÅÒÁ
 Summary(uk):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎ¦×. â¦ÂÌ¦ÏÔÅËÉ ĞÒÏÇÒÁÍ¦ÓÔÁ ÔÁ ÈÅÄÅÒÉ
 Group:		Libraries
 Requires(post):	/sbin/ldconfig
-Conflicts:	%{name} < 7.6-28
+Requires(post):	fileutils
+Conflicts:	tcp_wrappers < 7.6-28
 
 %description -n libwrap
 Security wrapper access control library which implement a rule-based
@@ -84,25 +85,27 @@ access control language with optional shell commands that are executed
 when a rule fires.
 
 %description -n libwrap -l pl
-Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
-kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
-pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
+Biblioteka wrappera bezpieczeñstwa zawieraj±ca implementacjê kontroli
+dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
+wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %package -n libwrap-devel
-Summary:	Security wrapper access control library
-Summary(pl):	Biblioteki wrappera bezpieczeñstwa
-Group:		Libraries
+Summary:	Header file and documentation for security wrapper access control library
+Summary(pl):	Plik nag³ówkowy i dokumentacja do biblioteki wrappera bezpieczeñstwa
+Group:		Development/Libraries
 Requires:	libwrap = %{version}-%{release}
 
 %description -n libwrap-devel
-Security wrapper access control library which implement a rule-based
-access control language with optional shell commands that are executed
+Header file and programmer's documentation for libwrap, security
+wrapper access control library which implement a rule-based access
+control language with optional shell commands that are executed
 when a rule fires.
 
 %description -n libwrap-devel -l pl
-Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
-kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
-pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
+Plik nag³ówkowy i dokumentacja programisty do libwrap - biblioteki
+wrappera bezpieczeñstwa zawieraj±cej implementacjê kontroli dostêpu
+bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
+zale¿nie od ustawionej regu³ki.
 
 %description -n libwrap-devel -l ru
 üÔÏÔ ĞÁËÅÔ ĞÏÚ×ÏÌÑÅÔ ÏÔÓÌÅÖÉ×ÁÔØ É ÆÉÌØÔÒÏ×ÁÔØ ×ÈÏÄÑİÉÅ ÚÁĞÒÏÓÙ Ë
@@ -126,18 +129,19 @@ Summary(pl):	Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento com tcp_wrappers
 Summary(ru):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎÏ×. óÔÁÔÉŞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ
 Summary(uk):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎ¦×. óÔÁÔÉŞÎ¦ Â¦ÂÌ¦ÏÔÅËÉ
-Group:		Libraries
+Group:		Development/Libraries
 Requires:	libwrap-devel = %{version}-%{release}
 
 %description -n libwrap-static
-Security wrapper access control library which implement a rule-based
-access control language with optional shell commands that are executed
-when a rule fires.
+Static version of libwrap, security wrapper access control library
+which implement a rule-based access control language with optional
+shell commands that are executed when a rule fires.
 
 %description -n libwrap-static -l pl
-Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
-kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
-pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
+Statyczna wersja libwrap - biblioteki wrappera bezpieczeñstwa
+zawieraj±cej implementacjê kontroli dostêpu bazuj±c± na jêzyku regu³,
+opcjonalnie z komendami pow³oki wykowywanymi zale¿nie od ustawionej
+regu³ki.
 
 %description -n libwrap-static -l pt_BR
 Bibliotecas e arquivos de inclusao para desenvolvimento com
@@ -172,7 +176,9 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ÔÁ ¦ÎÛÉÈ
 %patch8 -p1
 
 %build
-%{__make} linux CC="%{__cc}"
+%{__make} linux \
+	CC="%{__cc}" \
+	RPM_OPT_FLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
