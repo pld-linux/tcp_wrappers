@@ -8,7 +8,7 @@ Version:	7.6
 Release:	27
 License:	distributable
 Group:		Networking/Admin
-Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
+Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		http://www.imasy.or.jp/~ume/ipv6/%{name}_7.6-ipv6-1.9.diff.gz
