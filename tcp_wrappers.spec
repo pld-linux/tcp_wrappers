@@ -5,15 +5,17 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	14
+Release:	16
 License:	Distributable
 Group:		Networking/Admin
-Group(pl):	Sieciowe/Administracyjne
+Group(de):	Netzwerkwesen/Administration
+Group(pl):	Sieciowe/Administacyjne
 Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
-Patch0:		http://www.imasy.or.jp/~ume/ipv6/tcp_wrappers_7.6-ipv6-1.6.diff.gz
-Patch1:		tcp_wrappers-fix.patch
+Patch0:		http://www.imasy.or.jp/~ume/ipv6/%{name}_7.6-ipv6-1.9.diff.gz
+Patch1:		%{name}-fix.patch
+patch2:		%{name}-bug11881.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	libtool
 Requires:	libwrap
@@ -24,77 +26,81 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, and other
 network services.
 
 %description -l fr
-Avec ce paquetage, vous pouvez gérer et filtrer les requêtes entrantes pour
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et autres
-services réseau.
+Avec ce paquetage, vous pouvez gérer et filtrer les requêtes entrantes
+pour SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et
+autres services réseau.
 
 %description -l pl
-Z tym pakietem mo¿esz monitorowaæ i filtrowaæ nadchodz±ce pro¶by do SYSTAT,
-FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych us³ug
-sieciowych.
+Z tym pakietem mo¿esz monitorowaæ i filtrowaæ nadchodz±ce pro¶by do
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych
+us³ug sieciowych.
 
 %description -l tr
-Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ve
-diðer að hizmetleri için gelen istekleri izlemenizi ve isteðinize göre
-süzmenizi saðlar.
+Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK
+ve diðer að hizmetleri için gelen istekleri izlemenizi ve isteðinize
+göre süzmenizi saðlar.
 
 %package -n libwrap
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
+Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 
 %description -n libwrap
-Security wrapper access control library which implement a rule-based access
-control language with optional shell commands that are executed when a rule
-fires.
+Security wrapper access control library which implement a rule-based
+access control language with optional shell commands that are executed
+when a rule fires.
 
 %description -l pl -n libwrap
-Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
-dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
-wykowywanymi zale¿nie od ustawionej regu³ki.
+Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
+kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
+pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %package -n libwrap-devel
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
+Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Requires:	libwrap = %{version}-%{release}
 
 %description -n libwrap-devel
-Security wrapper access control library which implement a rule-based access
-control language with optional shell commands that are executed when a rule
-fires.
+Security wrapper access control library which implement a rule-based
+access control language with optional shell commands that are executed
+when a rule fires.
 
 %description -l pl -n libwrap-devel
-Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
-dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
-wykowywanymi zale¿nie od ustawionej regu³ki.
+Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
+kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
+pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %package -n libwrap-static
 Summary:	Security wrapper access control library (static version)
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
 Group:		Libraries
+Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Requires:	libwrap-devel = %{version}-%{release}
 
 %description -n libwrap-static
-Security wrapper access control library which implement a rule-based access
-control language with optional shell commands that are executed when a rule
-fires.
+Security wrapper access control library which implement a rule-based
+access control language with optional shell commands that are executed
+when a rule fires.
 
 %description -l pl -n libwrap-static
-Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
-dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
-wykowywanymi zale¿nie od ustawionej regu³ki.
+Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
+kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
+pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %prep
 %setup -q -n %{name}_%{version}
 %patch0 -p2
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} linux
@@ -124,9 +130,9 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 
 %post
 if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
-	mv /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
-	mv /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
-	mv /etc/hosts.{allow,deny} /etc/tcpd
+	mv -f /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
+	mv -f /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
+	mv -f /etc/hosts.{allow,deny} /etc/tcpd
 fi
 
 %post   -n libwrap -p /sbin/ldconfig
