@@ -76,7 +76,7 @@ install tcpd.h $RPM_BUILD_ROOT/usr/include
 install -s safe_finger tcpd tcpdchk tcpdmatch try-from $RPM_BUILD_ROOT/usr/sbin
 
 %post
-if [ ! -f /etc/hosts.allow -o ! -s /etc/host.deny ]; then
+if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
 	mv /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
 	mv /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
 	mv /etc/hosts.{allow,deny} /etc/tcpd
