@@ -7,6 +7,3 @@
 # the new secure portmap uses hosts.deny and hosts.allow.  In particular
 # you should know that NFS uses portmap!
 
-# WARNING:	New format hosts.deny entries is now:
-#
-#		daemon_list | client_list | option : option ...

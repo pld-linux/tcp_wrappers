@@ -3,6 +3,3 @@
 #		allowed to use the local INET services, as decided
 #		by the '/usr/sbin/tcpd' server.
 #
-# WARNING:	New format hosts.allow entries is now:
-#
-#		daemon_list | client_list | option : option ...
