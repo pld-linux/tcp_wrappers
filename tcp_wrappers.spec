@@ -8,7 +8,7 @@ Version:	7.6
 Release:	13
 Copyright:	Distributable
 Group:		Networking/Admin
-Group(pl):	Sieciowe/Administracja
+Group(pl):	Sieciowe/Administracyjne
 Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
