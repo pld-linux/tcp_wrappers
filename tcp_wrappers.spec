@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	26
+Release:	27
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
@@ -139,13 +139,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc BLURB CHANGES README* DISCLAIMER Banners.Makefile
 %dir %{_sysconfdir}/tcpd
-%{_mandir}/man[58]/*
+%{_mandir}/man8/*
 %attr(755,root,root) %{_sbindir}/*
 
 %files -n libwrap
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
 %attr(755,root,root) %{_libdir}/libwrap.so.*.*
+%{_mandir}/man5/*
 
 %files -n libwrap-devel
 %defattr(644,root,root,755)
