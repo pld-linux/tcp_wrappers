@@ -9,7 +9,7 @@ Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Summary(uk):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎ¦×
 Name:		tcp_wrappers
 Version:	7.6
-Release:	28
+Release:	29
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -193,9 +193,14 @@ rm -rf $RPM_BUILD_ROOT
 %post -n libwrap
 /sbin/ldconfig
 if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
-	mv -f /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
-	mv -f /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
-	mv -f /etc/hosts.{allow,deny} /etc/tcpd
+	if [ ! -L /etc/hosts.allow ]; then
+		mv -f /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
+		mv -f /etc/hosts.allow /etc/tcpd
+	fi
+	if [ ! -L /etc/tcpd/hosts.deny ]; then
+		mv -f /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
+		mv -f /etc/hosts.deny /etc/tcpd
+	fi
 fi
 
 %postun -n libwrap -p /sbin/ldconfig
