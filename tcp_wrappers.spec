@@ -5,8 +5,8 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	13
-Copyright:	Distributable
+Release:	14
+License:	Distributable
 Group:		Networking/Admin
 Group(pl):	Sieciowe/Administracyjne
 Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
@@ -25,23 +25,24 @@ network services.
 
 %description -l fr
 Avec ce paquetage, vous pouvez gérer et filtrer les requêtes entrantes pour
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et autres services
-réseau.
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et autres
+services réseau.
 
 %description -l pl
-Z tym pakietem mo¿esz monitorowaæ i filtrowaæ nadchodz±ce pro¶by do
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych
-us³ug sieciowych.
+Z tym pakietem mo¿esz monitorowaæ i filtrowaæ nadchodz±ce pro¶by do SYSTAT,
+FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych us³ug
+sieciowych.
 
 %description -l tr
-Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ve diðer
-að hizmetleri için gelen istekleri izlemenizi ve isteðinize göre süzmenizi
-saðlar.
+Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ve
+diðer að hizmetleri için gelen istekleri izlemenizi ve isteðinize göre
+süzmenizi saðlar.
 
 %package -n libwrap
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
+Group(fr):	Librairies
 Group(pl):	Biblioteki
 
 %description -n libwrap
@@ -51,14 +52,15 @@ fires.
 
 %description -l pl -n libwrap
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
-dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
-zale¿nie od ustawionej regu³ki.
+dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
+wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %package -n libwrap-devel
-Summary:        Security wrapper access control library
-Summary(pl):    Biblioteki wrappera bezpieczeñstwa
-Group:          Libraries
-Group(pl):      Biblioteki
+Summary:	Security wrapper access control library
+Summary(pl):	Biblioteki wrappera bezpieczeñstwa
+Group:		Libraries
+Group(fr):	Librairies
+Group(pl):	Biblioteki
 Requires:	libwrap = %{version}-%{release}
 
 %description -n libwrap-devel
@@ -68,14 +70,15 @@ fires.
 
 %description -l pl -n libwrap-devel
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
-dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
-zale¿nie od ustawionej regu³ki.
+dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
+wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %package -n libwrap-static
-Summary:        Security wrapper access control library (static version)
-Summary(pl):    Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
-Group:          Libraries
-Group(pl):      Biblioteki
+Summary:	Security wrapper access control library (static version)
+Summary(pl):	Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
+Group:		Libraries
+Group(fr):	Librairies
+Group(pl):	Biblioteki
 Requires:	libwrap-devel = %{version}-%{release}
 
 %description -n libwrap-static
@@ -85,8 +88,8 @@ fires.
 
 %description -l pl -n libwrap-static
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
-dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
-zale¿nie od ustawionej regu³ki.
+dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
+wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %prep
 %setup -q -n %{name}_%{version}
@@ -97,25 +100,27 @@ zale¿nie od ustawionej regu³ki.
 make linux
 
 %install
-rm -rf		$RPM_BUILD_ROOT
-install -d	$RPM_BUILD_ROOT/etc/tcpd
-install -d	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir},%{_includedir},%{_sbindir}}
+rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/tcpd \
+	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir},%{_includedir},%{_sbindir}}
 
-make	install				PREFIX=$RPM_BUILD_ROOT%{_prefix}
+make install \
+	PREFIX=$RPM_BUILD_ROOT%{_prefix}
+
 install	hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
 install {hosts_access,hosts_options}.5	$RPM_BUILD_ROOT%{_mandir}/man5
 install {tcpd,tcpdchk,tcpdmatch}.8	$RPM_BUILD_ROOT%{_mandir}/man8
 
-install	%{SOURCE1}	%{SOURCE2}	$RPM_BUILD_ROOT/etc/tcpd
+install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tcpd
 
-echo	".so hosts_access.5" >		$RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
-echo	".so hosts_access.5" >		$RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
+echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
+echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
-strip					$RPM_BUILD_ROOT%{_sbindir}/*
-strip	--strip-unneeded		$RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
+strip $RPM_BUILD_ROOT%{_sbindir}/*
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
-gzip	-9nf				$RPM_BUILD_ROOT%{_mandir}/man*/* \
-					BLURB CHANGES README* DISCLAIMER
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
+	BLURB CHANGES README* DISCLAIMER
 
 %post
 if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
@@ -133,8 +138,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *gz Banners.Makefile
-%dir /etc/tcpd
-%config(noreplace) %verify(not md5 mtime size) /etc/tcpd/hosts.*
+%dir %{_sysconfdir}/tcpd
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
 %{_mandir}/man[58]/*
 
 %attr(755,root,root) %{_sbindir}/*
