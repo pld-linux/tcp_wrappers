@@ -9,8 +9,7 @@ Release:	9
 Copyright:	Distributable
 Group:		Networking/Admin
 Group(pl):	Sieciowe/Administacyjne
-URL:		ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers
-Source0:	%{name}_%{version}.tar.gz
+Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		tcp_wrappers-config.patch
@@ -41,7 +40,7 @@ Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ve diðer
 að hizmetleri için gelen istekleri izlemenizi ve isteðinize göre süzmenizi
 saðlar.
 
-%package -n	libwrap
+%package -n libwrap
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
@@ -70,7 +69,8 @@ make linux RPM_OPT_FLAGS="$RPM_OPT_FLAGS -DINET6"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/tcpd,usr/{share/man/man{3,5,8},lib,include,sbin}}
+install -d $RPM_BUILD_ROOT/etc/tcpd \
+	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir},%{_includedir},%{_sbindir}}
 
 install hosts_access.3 $RPM_BUILD_ROOT%{_mandir}/man3
 install {hosts_access,hosts_options}.5 $RPM_BUILD_ROOT%{_mandir}/man5
@@ -96,7 +96,7 @@ if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
 fi
 
 if [ -f /var/lock/subsys/inetd ]; then
-    /etc/rc.d/init.d/inetd restart &>/dev/null
+	/etc/rc.d/init.d/inetd restart &>/dev/null
 fi     
 
 %clean
@@ -105,8 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *gz Banners.Makefile
-%attr(750,root,root) %dir /etc/tcpd
-%attr(640,root,root) %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
+%attr(750,root,bin) %dir /etc/tcpd
+%attr(640,root,bin) %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
 %{_mandir}/man[58]/*
 
 %attr(755,root,root) %{_sbindir}/*
