@@ -15,9 +15,8 @@ Source2:	hosts.deny
 Patch0:		tcp_wrappers-config.patch
 Patch1:		tcp_wrappers-inet_dir.patch
 Patch2:		tcp_wrappers-doc_fix.patch
-Patch3:		tcp_wrappers_7.6-ipv6-1.0-PLD.patch
-Patch4:		tcp_wrappers_7.6-linux-ipv6.patch
-Patch5:		tcp_wrappers-debian.patch
+Patch3:		tcp_wrappers-debian.patch
+Patch4:		tcp_wrappers_7.6_ume_IPv6.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 Requires:	libwrap
 
@@ -97,7 +96,6 @@ zale¿nie od ustawionej regu³ki.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 make linux
@@ -159,9 +157,12 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcp_wrappers.spec,v $
-Revision 1.18  1999-07-09 16:22:14  kloczek
+Revision 1.19  1999-07-11 13:53:48  misiek
+one patch instead two
 
-- added line on top spec file with cvs tags ($Revision:$ and $Date:$).
+Revision 1.18  1999/07/09 16:22:14  kloczek
+
+- added line on top spec file with cvs tags ($Revision: 1.19 $ and $Date: 1999-07-11 13:53:48 $).
 
 Revision 1.17  1999/07/09 10:51:45  misiek
 fixed permissions on /etc/tcpd/*
