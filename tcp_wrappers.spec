@@ -183,10 +183,16 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ‘¡ ¶Œ€…»
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/tcpd \
-	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir},%{_includedir},%{_sbindir}}
+	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir}} \
+	$RPM_BUILD_ROOT{%{_prefix}/lib,%{_includedir},%{_sbindir}}
 
 %{__make} install \
 	PREFIX=$RPM_BUILD_ROOT%{_prefix}
+
+if [ "%{_prefix}/lib" != "%{_libdir}" ] ; then
+	mv $RPM_BUILD_ROOT%{_prefix}/lib/* \
+		$RPM_BUILD_ROOT%{_libdir}
+fi
 
 install	hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
 install {hosts_access,hosts_options}.5	$RPM_BUILD_ROOT%{_mandir}/man5
