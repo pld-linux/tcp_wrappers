@@ -135,8 +135,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *gz Banners.Makefile
-%attr(750,root,bin) %dir /etc/tcpd
-%attr(640,root,bin) %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
+%attr(751,root,bin) %dir /etc/tcpd
+%attr(644,root,bin) %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
 %{_mandir}/man[58]/*
 
 %attr(755,root,root) %{_sbindir}/*
@@ -159,7 +159,10 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcp_wrappers.spec,v $
-Revision 1.16  1999-07-09 10:41:38  misiek
+Revision 1.17  1999-07-09 10:51:45  misiek
+fixed permissions on /etc/tcpd/*
+
+Revision 1.16  1999/07/09 10:41:38  misiek
 new ipv6 patch
 
 
