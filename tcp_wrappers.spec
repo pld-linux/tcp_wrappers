@@ -25,7 +25,6 @@ Patch5:		%{name}-fixgethostbyname.patch
 Patch6:		%{name}-alarm.patch
 Patch7:		%{name}-man_fixes.patch
 Patch8:		%{name}-weak-severity.patch
-Patch9:		%{name}-lt-tag.patch
 BuildRequires:	libtool
 Requires:	libwrap
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -171,7 +170,6 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ‘¡ ¶Œ€…»
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9
 
 %build
 %{__make} linux CC="%{__cc}"
