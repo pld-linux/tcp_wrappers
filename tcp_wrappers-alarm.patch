@@ -1,0 +1,28 @@
+--- tcp_wrappers_7.6/rfc931.c~	Thu Apr 19 14:07:22 2001
++++ tcp_wrappers_7.6/rfc931.c	Thu Apr 19 14:09:01 2001
+@@ -92,6 +92,7 @@
+     char   *cp;
+     char   *result = unknown;
+     FILE   *fp;
++    int    old_alarm;
+ 
+ #ifdef INET6
+     /* address family must be the same */
+@@ -135,7 +136,7 @@
+ 
+ 	if (sigsetjmp(timebuf,1) == 0) {
+ 	    signal(SIGALRM, timeout);
+-	    alarm(rfc931_timeout);
++	    old_alarm = alarm(rfc931_timeout);
+ 
+ 	    /*
+ 	     * Bind the local and remote ends of the query socket to the same
+@@ -221,7 +222,7 @@
+ 		    result = user;
+ 		}
+ 	    }
+-	    alarm(0);
++	    alarm(old_alarm);
+ 	}
+ 	fclose(fp);
+     }
