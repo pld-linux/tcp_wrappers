@@ -1,16 +1,18 @@
 Summary:	Security wrapper for tcp daemons
-Summary(de):	Sicherheitspackung fЭr tcp-DДmonen 
+Summary(de):	Sicherheitspackung fЭr tcp-DДmonen
+Summary(es):	Programa de seguridad para daemons tcp
 Summary(fr):	Enveloppe de sИcuritИ pour les dИmons tcp
 Summary(pl):	Wrapper bezpieczeЯstwa dla demonСw tcp
+Summary(pt_BR):	Programa de seguranГa para daemons tcp
+Summary(ru):	Security wrapper для tcp-демонов
 Summary(tr):	TCP sЭreГleri iГin gЭvenlik sarmalayЩcЩsЩ
+Summary(uk):	Security wrapper для tcp-демон╕в
 Name:		tcp_wrappers
 Version:	7.6
-Release:	25
+Release:	30
 License:	distributable
 Group:		Networking/Admin
-Group(de):	Netzwerkwesen/Administration
-Group(pl):	Sieciowe/Administracyjne
-Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
+Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		http://www.imasy.or.jp/~ume/ipv6/%{name}_7.6-ipv6-1.9.diff.gz
@@ -30,6 +32,11 @@ With this package you can monitor and filter incoming requests for the
 SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, and other
 network services.
 
+%description -l es
+Con este paquete puedes monitorar y filtrar llamadas de SYSTAT,
+FINGER, FTP, TElNET, RLOGIN, RSH, EXEC, TFTP, TALK, y otros servicios
+de red.
+
 %description -l fr
 Avec ce paquetage, vous pouvez gИrer et filtrer les requЙtes entrantes
 pour SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et
@@ -40,29 +47,41 @@ Z tym pakietem mo©esz monitorowaФ i filtrowaФ nadchodz╠ce pro╤by do
 SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych
 usЁug sieciowych.
 
+%description -l pt_BR
+Com este pacote vocЙ pode monitorar e filtrar chamadas de SYSTAT,
+FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, e outros serviГos
+de rede.
+
+%description -l ru
+Этот пакет позволяет отслеживать и фильтровать входящие запросы к
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK и другим
+сетевым сервисам.
+
 %description -l tr
 Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK
 ve diПer aП hizmetleri iГin gelen istekleri izlemenizi ve isteПinize
 gЖre sЭzmenizi saПlar.
 
+%description -l uk
+kЦей пакет дозволя╓ в╕дсл╕дковувати та ф╕льтрувати вх╕дн╕ запити до
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та ╕нших
+мережевих серв╕с╕в.
+
 %package -n libwrap
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeЯstwa
+Summary(ru):	Security wrapper для tcp-демонов. Библиотеки разработчика и хедера
+Summary(uk):	Security wrapper для tcp-демон╕в. Б╕бл╕отеки програм╕ста та хедери
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
+Requires(post):	/sbin/ldconfig
+Conflicts:	%{name} < 7.6-28
 
 %description -n libwrap
 Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -l pl -n libwrap
+%description -n libwrap -l pl
 Biblioteki wrappera bezpieczeЯstwa, ktСre zawieraj╠ implementacjЙ
 kontroli dostЙpu bazuj╠c╠ na jЙzyku reguЁ, opcjonalnie z komendami
 powЁoki wykowywanymi zale©nie od ustawionej reguЁki.
@@ -71,13 +90,6 @@ powЁoki wykowywanymi zale©nie od ustawionej reguЁki.
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeЯstwa
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Requires:	libwrap = %{version}-%{release}
 
 %description -n libwrap-devel
@@ -85,22 +97,34 @@ Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -l pl -n libwrap-devel
+%description -n libwrap-devel -l pl
 Biblioteki wrappera bezpieczeЯstwa, ktСre zawieraj╠ implementacjЙ
 kontroli dostЙpu bazuj╠c╠ na jЙzyku reguЁ, opcjonalnie z komendami
 powЁoki wykowywanymi zale©nie od ustawionej reguЁki.
 
+%description -n libwrap-devel -l ru
+Этот пакет позволяет отслеживать и фильтровать входящие запросы к
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK и другим
+сетевым сервисам.
+
+Это библиотеки разработчика и хедера, необходимые для разработки
+программ, использующих библиотеки tcp-wrapper'а.
+
+%description -n libwrap-devel -l uk
+Цей пакет дозволя╓ в╕дсл╕дковувати та ф╕льтрувати вх╕дн╕ запити до
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та ╕нших
+мережевих серв╕с╕в.
+
+Це б╕бл╕отеки програм╕ста та хедери, необх╕дн╕ для розробки програм,
+як╕ використовують б╕бл╕отеки tcp-wrapper'а.
+
 %package -n libwrap-static
 Summary:	Security wrapper access control library (static version)
 Summary(pl):	Biblioteki wrappera bezpieczeЯstwa (wersja statyczna)
+Summary(pt_BR):	Bibliotecas e arquivos de inclusЦo para desenvolvimento com tcp_wrappers
+Summary(ru):	Security wrapper для tcp-демонов. Статические библиотеки
+Summary(uk):	Security wrapper для tcp-демон╕в. Статичн╕ б╕бл╕отеки
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Requires:	libwrap-devel = %{version}-%{release}
 
 %description -n libwrap-static
@@ -108,10 +132,30 @@ Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -l pl -n libwrap-static
+%description -n libwrap-static -l pl
 Biblioteki wrappera bezpieczeЯstwa, ktСre zawieraj╠ implementacjЙ
 kontroli dostЙpu bazuj╠c╠ na jЙzyku reguЁ, opcjonalnie z komendami
 powЁoki wykowywanymi zale©nie od ustawionej reguЁki.
+
+%description -n libwrap-static -l pt_BR
+Bibliotecas e arquivos de inclusao para desenvolvimento com
+tcp_wrappers.
+
+%description -n libwrap-static -l ru
+Этот пакет позволяет отслеживать и фильтровать входящие запросы к
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK и другим
+сетевым сервисам.
+
+Это статические библиотеки, необходимые для разработки программ,
+использующих библиотеки tcp-wrapper'а.
+
+%description -n libwrap-static -l uk
+Цей пакет дозволя╓ в╕дсл╕дковувати та ф╕льтрувати вх╕дн╕ запити до
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та ╕нших
+мережевих серв╕с╕в.
+
+Це статичн╕ б╕бл╕отеки, необх╕дн╕ для розробки програм, як╕
+використовують б╕бл╕отеки tcp-wrapper'а.
 
 %prep
 %setup -q -n %{name}_%{version}
@@ -144,37 +188,41 @@ install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tcpd
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
-gzip -9nf BLURB CHANGES README* DISCLAIMER
-
-%post
-if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
-	mv -f /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
-	mv -f /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
-	mv -f /etc/hosts.{allow,deny} /etc/tcpd
-fi
-
-%post   -n libwrap -p /sbin/ldconfig
-%postun -n libwrap -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post -n libwrap
+/sbin/ldconfig
+if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
+	if [ ! -L /etc/hosts.allow ]; then
+		mv -f /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
+		mv -f /etc/hosts.allow /etc/tcpd
+	fi
+	if [ ! -L /etc/tcpd/hosts.deny ]; then
+		mv -f /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
+		mv -f /etc/hosts.deny /etc/tcpd
+	fi
+fi
+
+%postun -n libwrap -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%doc *gz Banners.Makefile
-%dir %{_sysconfdir}/tcpd
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
-%{_mandir}/man[58]/*
-
+%doc BLURB CHANGES README* DISCLAIMER Banners.Makefile
+%{_mandir}/man8/*
 %attr(755,root,root) %{_sbindir}/*
 
 %files -n libwrap
 %defattr(644,root,root,755)
+%dir %{_sysconfdir}/tcpd
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
 %attr(755,root,root) %{_libdir}/libwrap.so.*.*
+%{_mandir}/man5/*
 
 %files -n libwrap-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libwrap.so
+%{_libdir}/libwrap.la
 %{_includedir}/tcpd.h
 %{_mandir}/man3/*
 
