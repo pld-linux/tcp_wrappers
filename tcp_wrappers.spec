@@ -61,7 +61,7 @@ Summary:        Security wrapper access control library
 Summary(pl):    Biblioteki wrappera bezpieczeñstwa
 Group:          Libraries
 Group(pl):      Biblioteki
-Requires:	libwrap = %{version}-%{rerelase}
+Requires:	libwrap = %{version}-%{release}
 
 %description -n libwrap-devel
 Security wrapper access control library which implement a rule-based access
@@ -78,7 +78,7 @@ Summary:        Security wrapper access control library (static version)
 Summary(pl):    Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
 Group:          Libraries
 Group(pl):      Biblioteki
-Requires:	libwrap-devel = %{version}-%{rerelase}
+Requires:	libwrap-devel = %{version}-%{release}
 
 %description -n libwrap-static
 Security wrapper access control library which implement a rule-based access
