@@ -79,7 +79,7 @@ install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/etc/tcpd
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
-install libwrap.a $RPM_BUILD_ROOT/usr/lib
+install libwrap.a $RPM_BUILD_ROOT%{_libdir}
 install tcpd.h $RPM_BUILD_ROOT/usr/include
 install -s safe_finger tcpd tcpdchk tcpdmatch try-from $RPM_BUILD_ROOT/usr/sbin
 
@@ -107,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n libwrap
 %defattr(644,root,root,755)
 /usr/include/tcpd.h
-/usr/lib/libwrap.a
+%{_libdir}/libwrap.a
 %{_mandir}/man3/*
 
 %changelog
