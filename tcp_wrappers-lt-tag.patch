@@ -1,0 +1,11 @@
+--- Makefile~	Wed Jul 23 18:25:05 2003
++++ Makefile	Wed Jul 23 18:46:19 2003
+@@ -381,7 +381,7 @@
+ 	NETGROUP= TLI= all
+ 
+ ###############################################################
+-LIBTOOL = libtool
++LIBTOOL = libtool --tag=CC
+ PREFIX  = /usr/local
+ ###############################################################
+ # System dependencies: TLI (transport-level interface) support.
