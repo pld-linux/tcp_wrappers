@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	11
+Release:	12
 Copyright:	Distributable
 Group:		Networking/Admin
 Group(pl):	Sieciowe/Administracja
@@ -13,11 +13,12 @@ Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version
 Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		tcp_wrappers-config.patch
-Patch1:		tcp_wrappers-inet_dir.patch
+Patch1:		tcp_wrappers-tcpddir.patch
 Patch2:		tcp_wrappers-doc_fix.patch
 Patch3:		tcp_wrappers-debian.patch
-Patch4:		tcp_wrappers_7.6_ume_IPv6.patch
+Patch4:		http://www.imasy.or.jp/~ume/ipv6/tcp_wrappers_7.6-ipv6-1.4.diff.gz
 Buildroot:	/tmp/%{name}-%{version}-root
+BuildRequires:	libtool
 Requires:	libwrap
 
 %description
@@ -96,33 +97,31 @@ zale¿nie od ustawionej regu³ki.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
+%patch4 -p2
 
 %build
 make linux
 
 %install
-rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/tcpd \
-	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir},%{_includedir},%{_sbindir}}
+rm -rf		$RPM_BUILD_ROOT
+install -d	$RPM_BUILD_ROOT/etc/tcpd
+install -d	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir},%{_includedir},%{_sbindir}}
 
-make install PREFIX=$RPM_BUILD_ROOT/usr
-install hosts_access.3 $RPM_BUILD_ROOT%{_mandir}/man3
-install {hosts_access,hosts_options}.5 $RPM_BUILD_ROOT%{_mandir}/man5
-install {tcpd,tcpdchk,tcpdmatch}.8 $RPM_BUILD_ROOT%{_mandir}/man8
+make	install				PREFIX=$RPM_BUILD_ROOT%{_prefix}
+install	hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
+install {hosts_access,hosts_options}.5	$RPM_BUILD_ROOT%{_mandir}/man5
+install {tcpd,tcpdchk,tcpdmatch}.8	$RPM_BUILD_ROOT%{_mandir}/man8
 
-install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/etc/tcpd
+install	%{SOURCE1}	%{SOURCE2}	$RPM_BUILD_ROOT/etc/tcpd
 
-echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
-echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
+echo	".so hosts_access.5" >		$RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
+echo	".so hosts_access.5" >		$RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
-make install PREFIX=$RPM_BUILD_ROOT%{_prefix}
+strip					$RPM_BUILD_ROOT%{_sbindir}/*
+strip	--strip-unneeded		$RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
-strip $RPM_BUILD_ROOT%{_sbindir}/*
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	BLURB CHANGES README* DISCLAIMER
+gzip	-9nf				$RPM_BUILD_ROOT%{_mandir}/man*/* \
+					BLURB CHANGES README* DISCLAIMER
 
 %post
 if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
