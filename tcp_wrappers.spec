@@ -5,13 +5,13 @@ Summary(pl): Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr): TCP süreçleri için güvenlik sarmalayýcýsý
 Name:        tcp_wrappers
 Version:     7.6
-Release:     6
+Release:     7
 Copyright:   Distributable
 Group:       Networking/Admin
 Source:      ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
 Source1:     hosts.allow
 Source2:     hosts.deny
-Patch:       tcpw7.2-config.patch
+Patch:       tcpw-config.patch
 Patch1:      tcpw7.2-setenv.patch
 Buildroot:   /tmp/%{name}-%{version}-root
 
@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644, root, root, 755)
 %doc BLURB CHANGES README* DISCLAIMER Banners.Makefile
-%dir /etc/tcpd
+%attr(700, root, root) %dir /etc/tcpd
 %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
 %attr(644, root,  man) /usr/man/man[58]/*
 %attr(755, root, root) /usr/sbin/*
@@ -100,6 +100,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root,  man) /usr/man/man3/*
 
 %changelog
+* Sun Nov  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [7.6-7]
+- in tcpw-config.patch added modifications informs that hosts.{allow,deny}
+  files now placed in /etc/tcpd,
+- changed permission on /etc/tcpd to 700.
+
 * Sat Sep 26 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
   [7.6-6]
 - added pl translation.
