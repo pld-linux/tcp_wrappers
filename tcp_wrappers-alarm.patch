@@ -1,6 +1,6 @@
 diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
---- tcp_wrappers_7.6/rfc931.c	Thu Apr 26 15:42:26 2001
-+++ tcp_wrappers_7.6.alarm/rfc931.c	Thu Apr 26 15:41:53 2001
+--- tcp_wrappers_7.6/rfc931.c	Tue May  1 23:14:34 2001
++++ tcp_wrappers_7.6.alarm/rfc931.c	Tue May  1 23:13:56 2001
 @@ -20,7 +20,6 @@
  #include <sys/types.h>
  #include <sys/socket.h>
@@ -9,16 +9,17 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
  #include <signal.h>
  #include <string.h>
  
-@@ -33,7 +32,7 @@
+@@ -33,7 +32,8 @@
  
  int     rfc931_timeout = RFC931_TIMEOUT;/* Global so it can be changed */
  
 -static sigjmp_buf timebuf;
 +struct sigaction oldact;
++int	restored = 0;
  
  /* fsocket - open stdio stream on top of socket */
  
-@@ -59,10 +58,9 @@
+@@ -59,10 +59,10 @@
  
  /* timeout - handle timeouts */
  
@@ -28,10 +29,11 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
  {
 -    siglongjmp(timebuf, sig);
 +	sigaction(SIGALRM,&oldact,NULL);
++	restored = 1;
  }
  
  /* rfc931 - return remote user name, given socket structures */
-@@ -92,6 +90,8 @@
+@@ -92,6 +92,8 @@
      char   *cp;
      char   *result = unknown;
      FILE   *fp;
@@ -40,7 +42,7 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
  
  #ifdef INET6
      /* address family must be the same */
-@@ -133,9 +133,17 @@
+@@ -133,9 +135,18 @@
  	 * Set up a timer so we won't get stuck while waiting for the server.
  	 */
  
@@ -54,6 +56,7 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
 +	act.sa_flags |= SA_INTERRUPT;
 +#endif
 +	sigaction(SIGALRM,&act,&oldact);
++	restored = 0;
 +#ifdef HAVE_SIGINTERRUPT
 +	siginterrupt(SIGALRM,1);
 +#endif
@@ -61,12 +64,15 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
  
  	    /*
  	     * Bind the local and remote ends of the query socket to the same
-@@ -221,8 +229,7 @@
+@@ -221,8 +232,11 @@
  		    result = user;
  		}
  	    }
 -	    alarm(0);
--	}
++	if (!restored) {
++		sigaction(SIGALRM,&oldact,NULL);
++		restored = 1;
+ 	}
 +	alarm(old_alarm);
  	fclose(fp);
      }
