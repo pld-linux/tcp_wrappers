@@ -13,7 +13,7 @@ Release:	36
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
-# Source0-md5: e6fa25f71226d090f34de3f6b122fb5a
+# Source0-md5:	e6fa25f71226d090f34de3f6b122fb5a
 Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		http://www.imasy.or.jp/~ume/ipv6/%{name}_7.6-ipv6-1.9.diff.gz
