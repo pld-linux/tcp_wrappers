@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	16
+Release:	19
 License:	Distributable
 Group:		Networking/Admin
 Group(de):	Netzwerkwesen/Administration
@@ -15,7 +15,10 @@ Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		http://www.imasy.or.jp/~ume/ipv6/%{name}_7.6-ipv6-1.9.diff.gz
 Patch1:		%{name}-fix.patch
-patch2:		%{name}-bug11881.patch
+Patch2:		%{name}-bug11881.patch
+Patch3:		%{name}-bug17795.patch
+Patch4:		%{name}-bug17847.patch
+Patch5:		%{name}-fixgethostbyname.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	libtool
 Requires:	libwrap
@@ -45,6 +48,7 @@ Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 
@@ -63,6 +67,7 @@ Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Requires:	libwrap = %{version}-%{release}
@@ -82,6 +87,7 @@ Summary:	Security wrapper access control library (static version)
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
 Group:		Libraries
 Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Requires:	libwrap-devel = %{version}-%{release}
@@ -101,6 +107,9 @@ pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 %patch0 -p2
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
 %{__make} linux
