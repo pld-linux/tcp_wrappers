@@ -17,7 +17,6 @@ Patch1:		tcp_wrappers-inet_dir.patch
 Patch2:		tcp_wrappers-doc_fix.patch
 Patch3:		tcp_wrappers-ipv6.patch
 Patch4:		tcp_wrappers-setenv.patch
-Requires:	inetd
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -94,10 +93,6 @@ if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
 	mv /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
 	mv /etc/hosts.{allow,deny} /etc/tcpd
 fi
-
-if [ -f /var/lock/subsys/inetd ]; then
-	/etc/rc.d/init.d/inetd restart &>/dev/null
-fi     
 
 %clean
 rm -rf $RPM_BUILD_ROOT
