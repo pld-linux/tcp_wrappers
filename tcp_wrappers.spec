@@ -1,16 +1,17 @@
 Summary:     Security wrapper for tcp daemons
 Summary(de): Sicherheitspackung für tcp-Dämonen 
 Summary(fr): Enveloppe de sécurité pour les démons tcp
+Summary(pl): Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr): TCP süreçleri için güvenlik sarmalayýcýsý
 Name:        tcp_wrappers
 Version:     7.6
-Release:     5
+Release:     6
 Copyright:   Distributable
 Group:       Networking/Admin
 Source:      ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
 Source1:     hosts.allow
 Source2:     hosts.deny
-Patch:       tcp_wrappers-config.patch
+Patch:       tcpw7.2-config.patch
 Patch1:      tcpw7.2-setenv.patch
 Buildroot:   /tmp/%{name}-%{version}-root
 
@@ -24,6 +25,11 @@ Avec ce paquetage, vous pouvez gérer et filtrer les requêtes entrantes pour
 SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et autres services
 réseau.
 
+%description -l pl
+Z tym pakietem mo¿esz monitorowaæ i filtrowaæ nadchodz±ce pro¶by do
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, i innych
+us³ug sieciowych.
+
 %description -l tr
 Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ve diðer
 að hizmetleri için gelen istekleri izlemenizi ve isteðinize göre süzmenizi
@@ -31,12 +37,18 @@ saðlar.
 
 %package -n libwrap
 Summary:     Security wrapper access control library
+Summary(pl): Biblioteki wrappera bezpieczeñstwa
 Group:       Libraries
 
 %description -n libwrap
 Security wrapper access control library which implement a rule-based access
 control language with optional shell commands that are executed when a rule
 fires.
+
+%description -l pl -n libwrap
+Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
+dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
+zale¿nie od ustawionej regu³ki.
 
 %prep
 %setup -q -n %{name}_%{version}
@@ -88,6 +100,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root,  man) /usr/man/man3/*
 
 %changelog
+* Sat Sep 26 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
+  [7.6-6]
+- added pl translation.
+
 * Thu Aug 18 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [7.6-5]
 - added -q %setup parameter,
@@ -104,7 +120,6 @@ rm -rf $RPM_BUILD_ROOT
 - added %post section with moving previouse hosts.{allow,deny} to /etc/tcpd,
 - added %attr and %defattr macros in %files (allow build package from
   non-root account).
-
 
 * Thu Jun 25 1998 Alan Cox <alan@redhat.com>
 - Erp where did the Dec 05 patch escape to
