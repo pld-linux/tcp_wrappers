@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	25
+Release:	26
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
@@ -47,6 +47,7 @@ göre süzmenizi saðlar.
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
+Requires(post):	/sbin/ldconfig
 
 %description -n libwrap
 Security wrapper access control library which implement a rule-based
@@ -121,16 +122,14 @@ install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tcpd
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
-gzip -9nf BLURB CHANGES README* DISCLAIMER
-
-%post
+%post -n libwrap
+/sbin/ldconfig
 if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
 	mv -f /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
 	mv -f /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
 	mv -f /etc/hosts.{allow,deny} /etc/tcpd
 fi
 
-%post   -n libwrap -p /sbin/ldconfig
 %postun -n libwrap -p /sbin/ldconfig
 
 %clean
@@ -138,15 +137,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *gz Banners.Makefile
+%doc BLURB CHANGES README* DISCLAIMER Banners.Makefile
 %dir %{_sysconfdir}/tcpd
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
 %{_mandir}/man[58]/*
-
 %attr(755,root,root) %{_sbindir}/*
 
 %files -n libwrap
 %defattr(644,root,root,755)
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
 %attr(755,root,root) %{_libdir}/libwrap.so.*.*
 
 %files -n libwrap-devel
