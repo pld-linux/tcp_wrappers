@@ -8,8 +8,6 @@ Version:	7.6
 Release:	25
 License:	distributable
 Group:		Networking/Admin
-Group(de):	Netzwerkwesen/Administration
-Group(pl):	Sieciowe/Administracyjne
 Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
@@ -49,13 +47,6 @@ göre süzmenizi sağlar.
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	âÉÂÌÉÏÔÅËÉ
-Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 
 %description -n libwrap
 Security wrapper access control library which implement a rule-based
@@ -71,13 +62,6 @@ pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 Summary:	Security wrapper access control library
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	âÉÂÌÉÏÔÅËÉ
-Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 Requires:	libwrap = %{version}-%{release}
 
 %description -n libwrap-devel
@@ -94,13 +78,6 @@ pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
 Summary:	Security wrapper access control library (static version)
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	âÉÂÌÉÏÔÅËÉ
-Group(uk):	â¦ÂÌ¦ÏÔÅËÉ
 Requires:	libwrap-devel = %{version}-%{release}
 
 %description -n libwrap-static
