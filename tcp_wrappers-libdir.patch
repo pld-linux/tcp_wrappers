@@ -1,0 +1,29 @@
+diff -durN -x '*~' tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
+--- tcp_wrappers_7.6.orig/Makefile	2004-12-21 16:51:14.000000000 +0100
++++ tcp_wrappers_7.6/Makefile	2004-12-21 16:54:42.120313304 +0100
+@@ -383,6 +383,7 @@
+ ###############################################################
+ LIBTOOL = libtool
+ PREFIX  = /usr/local
++LIBDIR	= $(PREFIX)/lib
+ ###############################################################
+ # System dependencies: TLI (transport-level interface) support.
+ # 
+@@ -726,7 +727,7 @@
+ 
+ $(LIB):	$(LIB_OBJ)
+ 	rm -f $(LIB)
+-	$(LIBTOOL) $(CC) -O -o $(LIB) $(LIB_OBJ) -rpath /usr/lib
++	$(LIBTOOL) $(CC) -O -o $(LIB) $(LIB_OBJ) -rpath $(LIBDIR)
+ 
+ tcpd:	tcpd.o $(LIB)
+ 	$(LIBTOOL) $(CC) $(CFLAGS) -o $@ tcpd.o $(LIB) $(LIBS)
+@@ -772,7 +773,7 @@
+ 
+ install:
+ 	-install -d $(PREFIX)/{sbin,include}
+-	$(LIBTOOL) install -c $(LIB) $(PREFIX)/lib/$(LIB)
++	$(LIBTOOL) install -c $(LIB) $(LIBDIR)/$(LIB)
+ 	for PROG in safe_finger tcpdchk try-from tcpd tcpdmatch ; do \
+ 	$(LIBTOOL) install -c $$PROG $(PREFIX)/sbin/$$PROG ; done
+ 	install tcpd.h $(PREFIX)/include/
