@@ -119,7 +119,7 @@ echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 make install PREFIX=$RPM_BUILD_ROOT%{_prefix}
 
 strip $RPM_BUILD_ROOT%{_sbindir}/*
-strip --stripp-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	BLURB CHANGES README* DISCLAIMER
