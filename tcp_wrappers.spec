@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	10
+Release:	11
 Copyright:	Distributable
 Group:		Networking/Admin
 Group(pl):	Sieciowe/Administacyjne
@@ -133,8 +133,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *gz Banners.Makefile
-%attr(751,root,bin) %dir /etc/tcpd
-%attr(644,root,bin) %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
+%dir /etc/tcpd
+%config(noreplace) %verify(not md5 mtime size) /etc/tcpd/hosts.*
 %{_mandir}/man[58]/*
 
 %attr(755,root,root) %{_sbindir}/*
@@ -157,20 +157,22 @@ rm -rf $RPM_BUILD_ROOT
 - new commenting style:
 
 $Log: tcp_wrappers.spec,v $
-Revision 1.19  1999-07-11 13:53:48  misiek
+Revision 1.20  1999-07-12 12:47:45  kloczek
+
+- changed permission to hosts.* filesa and added (noreplace) to %config.
+
+Revision 1.19  1999/07/11 13:53:48  misiek
 one patch instead two
 
 Revision 1.18  1999/07/09 16:22:14  kloczek
 
-- added line on top spec file with cvs tags ($Revision: 1.19 $ and $Date: 1999-07-11 13:53:48 $).
+- added line on top spec file with cvs tags ($Revision: 1.20 $ and $Date: 1999-07-12 12:47:45 $).
 
 Revision 1.17  1999/07/09 10:51:45  misiek
 fixed permissions on /etc/tcpd/*
 
 Revision 1.16  1999/07/09 10:41:38  misiek
 new ipv6 patch
-
-
 
 * Thu Apr 15 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [7.6-8]
