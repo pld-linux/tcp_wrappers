@@ -124,7 +124,7 @@ rm -rf $RPM_BUILD_ROOT
   to hosts_access(5) instead making sym link to hosts_access.5 (this allow
   compress man pages in future),
 - added %post section with moving previouse hosts.{allow,deny} to /etc/tcpd,
-- added %attr and %defattr macros in %files (allow build package from
+- added %attr and %defattr macros in %files (allows build package from
   non-root account).
 
 * Thu Jun 25 1998 Alan Cox <alan@redhat.com>
