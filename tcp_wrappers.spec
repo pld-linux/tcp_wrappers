@@ -25,6 +25,7 @@ Patch5:		%{name}-fixgethostbyname.patch
 Patch6:		%{name}-alarm.patch
 Patch7:		%{name}-man_fixes.patch
 Patch8:		%{name}-weak-severity.patch
+Patch9:		%{name}-libdir.patch
 BuildRequires:	libtool
 Requires:	libwrap = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -174,10 +175,13 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ‘¡ ¶Œ€…»
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 %{__make} linux \
 	CC="%{__cc}" \
+	PREFIX=%{_prefix} \
+	LIBDIR=%{_libdir} \
 	RPM_OPT_FLAGS="%{rpmcflags}"
 
 %install
@@ -187,12 +191,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/tcpd \
 	$RPM_BUILD_ROOT{%{_prefix}/lib,%{_includedir},%{_sbindir}}
 
 %{__make} install \
-	PREFIX=$RPM_BUILD_ROOT%{_prefix}
-
-if [ "%{_prefix}/lib" != "%{_libdir}" ] ; then
-	mv $RPM_BUILD_ROOT%{_prefix}/lib/* \
-		$RPM_BUILD_ROOT%{_libdir}
-fi
+	PREFIX=$RPM_BUILD_ROOT%{_prefix} \
+	LIBDIR=$RPM_BUILD_ROOT%{_libdir} 
 
 install	hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
 install {hosts_access,hosts_options}.5	$RPM_BUILD_ROOT%{_mandir}/man5
