@@ -70,20 +70,20 @@ make linux RPM_OPT_FLAGS="$RPM_OPT_FLAGS -DINET6"
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/tcpd,usr/{man/man{3,5,8},lib,include,sbin}}
 
-install hosts_access.3 $RPM_BUILD_ROOT/usr/man/man3
-install {hosts_access,hosts_options}.5 $RPM_BUILD_ROOT/usr/man/man5
-install {tcpd,tcpdchk,tcpdmatch}.8 $RPM_BUILD_ROOT/usr/man/man8
+install hosts_access.3 $RPM_BUILD_ROOT%{_mandir}/man3
+install {hosts_access,hosts_options}.5 $RPM_BUILD_ROOT%{_mandir}/man5
+install {tcpd,tcpdchk,tcpdmatch}.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
 install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/etc/tcpd
 
-echo ".so hosts_access.5" > $RPM_BUILD_ROOT/usr/man/man5/hosts.allow.5
-echo ".so hosts_access.5" > $RPM_BUILD_ROOT/usr/man/man5/hosts.deny.5
+echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
+echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
 install libwrap.a $RPM_BUILD_ROOT/usr/lib
 install tcpd.h $RPM_BUILD_ROOT/usr/include
 install -s safe_finger tcpd tcpdchk tcpdmatch try-from $RPM_BUILD_ROOT/usr/sbin
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	BLURB CHANGES README* DISCLAIMER
 
 %post
@@ -101,14 +101,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc *gz Banners.Makefile
 %attr(750,root,bin) %dir /etc/tcpd
 %attr(440,root,bin) %config %verify(not md5 mtime size) /etc/tcpd/hosts.*
-/usr/man/man[58]/*
+%{_mandir}/man[58]/*
 %attr(755,root,root) /usr/sbin/*
 
 %files -n libwrap
 %defattr(644,root,root,755)
 /usr/include/tcpd.h
 /usr/lib/libwrap.a
-/usr/man/man3/*
+%{_mandir}/man3/*
 
 %changelog
 * Thu Apr 15 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
