@@ -1,5 +1,5 @@
 Summary:	Security wrapper for tcp daemons
-Summary(de):	Sicherheitspackung für tcp-Dämonen 
+Summary(de):	Sicherheitspackung für tcp-Dämonen
 Summary(fr):	Enveloppe de sécurité pour les démons tcp
 Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
@@ -53,7 +53,7 @@ Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -l pl -n libwrap
+%description -n libwrap -l pl
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
 kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
 pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
@@ -69,7 +69,7 @@ Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -l pl -n libwrap-devel
+%description -n libwrap-devel -l pl
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
 kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
 pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
@@ -85,7 +85,7 @@ Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -l pl -n libwrap-static
+%description -n libwrap-static -l pl
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
 kontroli dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami
 pow³oki wykowywanymi zale¿nie od ustawionej regu³ki.
