@@ -218,8 +218,8 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc BLURB CHANGES README* DISCLAIMER Banners.Makefile
-%{_mandir}/man8/*
 %attr(755,root,root) %{_sbindir}/*
+%{_mandir}/man8/*
 
 %files -n libwrap
 %defattr(644,root,root,755)
