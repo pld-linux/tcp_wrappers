@@ -5,19 +5,15 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	13
+Release:	12
 Copyright:	Distributable
 Group:		Networking/Admin
 Group(pl):	Sieciowe/Administracja
 Source0:	ftp://coast.cs.purdue.edu/pub/tools/unix/tcp_wrappers/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
-Patch0:		tcp_wrappers-config.patch
-Patch1:		tcp_wrappers-tcpddir.patch
-Patch2:		tcp_wrappers-doc_fix.patch
-Patch3:		tcp_wrappers-debian.patch
-#IPv6 patch:	http://www.imasy.or.jp/~ume/ipv6/
-Patch4:		tcp_wrappers-ipv6-1.5.patch
+Patch0:		http://www.imasy.or.jp/~ume/ipv6/tcp_wrappers_7.6-ipv6-1.6.diff.gz
+Patch1:		tcp_wrappers-fix.patch
 Buildroot:	/tmp/%{name}-%{version}-root
 BuildRequires:	libtool
 Requires:	libwrap
@@ -94,11 +90,8 @@ zale¿nie od ustawionej regu³ki.
 
 %prep
 %setup -q -n %{name}_%{version}
-%patch0 -p1
+%patch0 -p2
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 %build
 make linux
