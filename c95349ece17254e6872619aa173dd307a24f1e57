@@ -1,0 +1,1 @@
+- changed permission to hosts.* files and added (noreplace) to %config.
