@@ -119,7 +119,6 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ÔÁ ¦ÎÛÉÈ
 
 %package -n libwrap-static
 Summary:	Security wrapper access control library (static version)
-Summary(es):	Libraries and include files needed for tcp_wrappers development
 Summary(pl):	Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento com tcp_wrappers
 Summary(ru):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎÏ×. óÔÁÔÉŞÅÓËÉÅ ÂÉÂÌÉÏÔÅËÉ
@@ -131,9 +130,6 @@ Requires:	libwrap-devel = %{version}-%{release}
 Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
-
-%description -n libwrap-static -l es
-Libraries and include files needed for tcp_wrappers development.
 
 %description -n libwrap-static -l pl
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê
