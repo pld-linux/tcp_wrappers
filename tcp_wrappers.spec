@@ -5,7 +5,7 @@ Summary(pl):	Wrapper bezpieczeñstwa dla demonów tcp
 Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Name:		tcp_wrappers
 Version:	7.6
-Release:	27
+Release:	28
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -122,6 +122,9 @@ install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tcpd
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post -n libwrap
 /sbin/ldconfig
 if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
@@ -132,18 +135,15 @@ fi
 
 %postun -n libwrap -p /sbin/ldconfig
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(644,root,root,755)
 %doc BLURB CHANGES README* DISCLAIMER Banners.Makefile
-%dir %{_sysconfdir}/tcpd
 %{_mandir}/man8/*
 %attr(755,root,root) %{_sbindir}/*
 
 %files -n libwrap
 %defattr(644,root,root,755)
+%dir %{_sysconfdir}/tcpd
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
 %attr(755,root,root) %{_libdir}/libwrap.so.*.*
 %{_mandir}/man5/*
