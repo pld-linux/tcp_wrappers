@@ -56,28 +56,12 @@ Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
 dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
 zale¿nie od ustawionej regu³ki.
 
-%package -n libwrap-static
-Summary:        Security wrapper access control library (static version)
-Summary(pl):    Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
-Group:          Libraries
-Group(pl):      Biblioteki
-
-%description -n libwrap-static
-Security wrapper access control library which implement a rule-based access
-control language with optional shell commands that are executed when a rule
-fires.
-
-%description -l pl -n libwrap-static
-Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
-dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
-zale¿nie od ustawionej regu³ki.
-
 %package -n libwrap-devel
 Summary:        Security wrapper access control library
 Summary(pl):    Biblioteki wrappera bezpieczeñstwa
 Group:          Libraries
 Group(pl):      Biblioteki
-Requires:	libwrap
+Requires:	libwrap = %{version}-%{rerelase}
 
 %description -n libwrap-devel
 Security wrapper access control library which implement a rule-based access
@@ -85,6 +69,23 @@ control language with optional shell commands that are executed when a rule
 fires.
 
 %description -l pl -n libwrap-devel
+Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
+dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
+zale¿nie od ustawionej regu³ki.
+
+%package -n libwrap-static
+Summary:        Security wrapper access control library (static version)
+Summary(pl):    Biblioteki wrappera bezpieczeñstwa (wersja statyczna)
+Group:          Libraries
+Group(pl):      Biblioteki
+Requires:	libwrap-devel = %{version}-%{rerelase}
+
+%description -n libwrap-static
+Security wrapper access control library which implement a rule-based access
+control language with optional shell commands that are executed when a rule
+fires.
+
+%description -l pl -n libwrap-static
 Biblioteki wrappera bezpieczeñstwa, które zawieraj± implementacjê kontroli
 dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki wykowywanymi
 zale¿nie od ustawionej regu³ki.
@@ -127,6 +128,9 @@ if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
 	mv /etc/hosts.{allow,deny} /etc/tcpd
 fi
 
+%post   -n libwrap -p /sbin/ldconfig
+%postun -n libwrap -p /sbin/ldconfig
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -139,14 +143,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_sbindir}/*
 
-%files -n libwrap-devel
-%defattr(644,root,root,755)
-%{_includedir}/tcpd.h
-%{_mandir}/man3/*
-
 %files -n libwrap
 %defattr(644,root,root,755)
-%{_libdir}/libwrap.s*
+%attr(755,root,root) %{_libdir}/libwrap.so.*.*
+
+%files -n libwrap-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libwrap.so
+%{_includedir}/tcpd.h
+%{_mandir}/man3/*
 
 %files -n libwrap-static
 %defattr(644,root,root,755)
