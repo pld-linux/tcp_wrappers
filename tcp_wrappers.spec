@@ -14,7 +14,7 @@ Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		http://www.imasy.or.jp/~ume/ipv6/tcp_wrappers_7.6-ipv6-1.6.diff.gz
 Patch1:		tcp_wrappers-fix.patch
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	libtool
 Requires:	libwrap
 
