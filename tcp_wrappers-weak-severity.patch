@@ -1,41 +1,36 @@
---- tcp-wrappers-7.6-ipv6.1.orig/tcpd.h
-+++ tcp-wrappers-7.6-ipv6.1/tcpd.h
-@@ -156,8 +179,14 @@
+diff -Nur tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
+--- tcp_wrappers_7.6.orig/Makefile	2003-08-23 07:31:20.000000000 +0200
++++ tcp_wrappers_7.6/Makefile	2003-08-23 07:37:05.114291496 +0200
+@@ -152,7 +152,7 @@
+ linux:
+ 	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
+ 	LIBS= RANLIB=ranlib ARFLAGS=rv AUX_OBJ= NETGROUP= TLI= \
+-	EXTRA_CFLAGS="$(RPM_OPT_FLAGS) -DSYS_ERRLIST_DEFINED -DBROKEN_SO_LINGER -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len" all
++	EXTRA_CFLAGS="$(RPM_OPT_FLAGS) -DHAVE_WEAKSYMS -DSYS_ERRLIST_DEFINED -DBROKEN_SO_LINGER -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len" all
  
- /* Global variables. */
+ linux-old:
+ 	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
+@@ -695,7 +695,7 @@
+ LIB_OBJ= hosts_access.lo options.lo shell_cmd.lo rfc931.lo eval.lo \
+ 	hosts_ctl.lo refuse.lo percent_x.lo clean_exit.lo $(AUX_OBJ) \
+ 	$(FROM_OBJ) fix_options.lo socket.lo tli.lo workarounds.lo \
+-	update.lo misc.lo diag.lo percent_m.lo myvsyslog.lo
++	update.lo misc.lo diag.lo percent_m.lo myvsyslog.lo weak_symbols.lo
  
-+#ifndef DONTHAVE_WEAKSYMS
-+extern int allow_severity __attribute__ ((weak)); /* for connection logging */
-+extern int deny_severity __attribute__ ((weak)); /* for connection logging */
-+#else
- extern int allow_severity;		/* for connection logging */
- extern int deny_severity;		/* for connection logging */
-+#endif
-+
- extern char *hosts_allow_table;		/* for verification mode redirection */
- extern char *hosts_deny_table;		/* for verification mode redirection */
- extern int hosts_access_verbose;	/* for verbose matching mode */
---- tcp-wrappers-7.6-ipv6.1.orig/Makefile
-+++ tcp-wrappers-7.6-ipv6.1/Makefile
-@@ -899,5 +969,6 @@
- update.o: mystdarg.h
- update.o: tcpd.h
- vfprintf.o: cflags
-+weak_symbols.o: tcpd.h
- workarounds.o: cflags
- workarounds.o: tcpd.h
---- tcp-wrappers-7.6-ipv6.1.orig/weak_symbols.c
-+++ tcp-wrappers-7.6-ipv6.1/weak_symbols.c
+ FROM_OBJ= fromhost.lo
+ 
+diff -Nur tcp_wrappers_7.6.orig/weak_symbols.c tcp_wrappers_7.6/weak_symbols.c
+--- tcp_wrappers_7.6.orig/weak_symbols.c	1970-01-01 01:00:00.000000000 +0100
++++ tcp_wrappers_7.6/weak_symbols.c	2003-08-23 07:40:03.717139736 +0200
 @@ -0,0 +1,11 @@
-+ /*
-+  * @(#) weak_symbols.h 1.5 99/12/29 23:50
-+  * 
-+  * Author: Anthony Towns <ajt@debian.org>
-+  */
++/*
++ * @(#) weak_symbols.h 1.5 99/12/29 23:50
++ *
++ * Author: Anthony Towns <ajt@debian.org>
++ */
 +
-+#ifndef DONTHAVE_WEAKSYMS
++#ifdef HAVE_WEAKSYMS
 +#include <syslog.h>
-+int deny_severity = LOG_WARNING;
-+int allow_severity = SEVERITY; 
++int deny_severity __attribute__((weak)) = LOG_WARNING;
++int allow_severity __attribute__((weak)) = SEVERITY;
 +#endif
-
