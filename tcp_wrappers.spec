@@ -9,7 +9,7 @@ Summary(tr):	TCP süreçleri için güvenlik sarmalayýcýsý
 Summary(uk):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎ¦×
 Name:		tcp_wrappers
 Version:	7.6
-Release:	38
+Release:	39
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -188,14 +188,14 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ÔÁ ¦ÎÛÉÈ
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/tcpd \
 	$RPM_BUILD_ROOT{%{_mandir}/man{3,5,8},%{_libdir}} \
-	$RPM_BUILD_ROOT{/lib,%{_includedir},%{_sbindir}}
+	$RPM_BUILD_ROOT{/%{_lib},%{_includedir},%{_sbindir}}
 
 %{__make} install \
 	PREFIX=$RPM_BUILD_ROOT%{_prefix} \
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir} 
 
-mv $RPM_BUILD_ROOT%{_libdir}/libwrap.so.*.*.* $RPM_BUILD_ROOT/lib/
-ln -sf /lib/$(cd $RPM_BUILD_ROOT/lib ; echo libwrap.so.*.*.*) \
+mv $RPM_BUILD_ROOT%{_libdir}/libwrap.so.*.*.* $RPM_BUILD_ROOT/%{_lib}
+ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib} ; echo libwrap.so.*.*.*) \
         $RPM_BUILD_ROOT%{_libdir}/libwrap.so
 
 install	hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
@@ -235,7 +235,7 @@ fi
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}/tcpd
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
-%attr(755,root,root) /lib/libwrap.so.*.*
+%attr(755,root,root) /%{_lib}/libwrap.so.*.*
 %{_mandir}/man5/*
 
 %files -n libwrap-devel
