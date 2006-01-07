@@ -26,6 +26,7 @@ Patch6:		%{name}-alarm.patch
 Patch7:		%{name}-man_fixes.patch
 Patch8:		%{name}-weak-severity.patch
 Patch9:		%{name}-libdir.patch
+Patch10:	%{name}-libtool.patch
 BuildRequires:	libtool
 Requires:	libwrap = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -76,8 +77,8 @@ Summary(pl):	Biblioteka wrappera bezpieczeñstwa
 Summary(ru):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎÏ×. âÉÂÌÉÏÔÅËÉ ÒÁÚÒÁÂÏÔŞÉËÁ É ÈÅÄÅÒÁ
 Summary(uk):	Security wrapper ÄÌÑ tcp-ÄÅÍÏÎ¦×. â¦ÂÌ¦ÏÔÅËÉ ĞÒÏÇÒÁÍ¦ÓÔÁ ÔÁ ÈÅÄÅÒÉ
 Group:		Libraries
-Requires(post):	/sbin/ldconfig
 Requires(post):	fileutils
+Requires:	libwrap-libs = %{version}-%{release}
 Conflicts:	tcp_wrappers < 7.6-28
 
 %description -n libwrap
@@ -90,17 +91,27 @@ Biblioteka wrappera bezpieczeñstwa zawieraj±ca implementacjê kontroli
 dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
 wykowywanymi zale¿nie od ustawionej regu³ki.
 
+%package -n libwrap-libs
+Summary:	Security wrapper access control library
+Group:		Libraries
+Conflicts:	tcp_wrappers < 7.6-28
+
+%description -n libwrap-libs
+Security wrapper access control library which implement a rule-based
+access control language with optional shell commands that are executed
+when a rule fires.
+
 %package -n libwrap-devel
 Summary:	Header file and documentation for security wrapper access control library
 Summary(pl):	Plik nag³ówkowy i dokumentacja do biblioteki wrappera bezpieczeñstwa
 Group:		Development/Libraries
-Requires:	libwrap = %{version}-%{release}
+Requires:	libwrap-libs = %{version}-%{release}
 
 %description -n libwrap-devel
 Header file and programmer's documentation for libwrap, security
 wrapper access control library which implement a rule-based access
-control language with optional shell commands that are executed
-when a rule fires.
+control language with optional shell commands that are executed when a
+rule fires.
 
 %description -n libwrap-devel -l pl
 Plik nag³ówkowy i dokumentacja programisty do libwrap - biblioteki
@@ -176,6 +187,7 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK ÔÁ ¦ÎÛÉÈ
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 %build
 %{__make} linux \
@@ -192,7 +204,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/tcpd \
 
 %{__make} install \
 	PREFIX=$RPM_BUILD_ROOT%{_prefix} \
-	LIBDIR=$RPM_BUILD_ROOT%{_libdir} 
+	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 
 mv $RPM_BUILD_ROOT%{_libdir}/libwrap.so.*.*.* $RPM_BUILD_ROOT/%{_lib}
 ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib} ; echo libwrap.so.*.*.*) \
@@ -211,19 +223,19 @@ echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
 rm -rf $RPM_BUILD_ROOT
 
 %post -n libwrap
-/sbin/ldconfig
 if [ -f /etc/hosts.allow -o -f /etc/host.deny ]; then
 	if [ ! -L /etc/hosts.allow ]; then
-		mv -f /etc/tcpd/hosts.allow /etc/tcpd/hosts.allow.newrpm
+		mv -f /etc/tcpd/hosts.allow{,.rpmnew}
 		mv -f /etc/hosts.allow /etc/tcpd
 	fi
 	if [ ! -L /etc/tcpd/hosts.deny ]; then
-		mv -f /etc/tcpd/hosts.deny  /etc/tcpd/hosts.deny.newrpm
+		mv -f /etc/tcpd/hosts.deny{,.rpmnew}
 		mv -f /etc/hosts.deny /etc/tcpd
 	fi
 fi
 
-%postun -n libwrap -p /sbin/ldconfig
+%post	-n libwrap-libs -p /sbin/ldconfig
+%postun	-n libwrap-libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -235,8 +247,11 @@ fi
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}/tcpd
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
-%attr(755,root,root) /%{_lib}/libwrap.so.*.*
 %{_mandir}/man5/*
+
+%files -n libwrap-libs
+%defattr(644,root,root,755)
+%attr(755,root,root) /%{_lib}/libwrap.so.*.*
 
 %files -n libwrap-devel
 %defattr(644,root,root,755)
