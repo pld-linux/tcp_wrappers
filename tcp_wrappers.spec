@@ -93,6 +93,7 @@ wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %package -n libwrap-libs
 Summary:	Security wrapper access control library
+Summary(pl):	Biblioteka wrappera bezpieczeñstwa
 Group:		Libraries
 Conflicts:	tcp_wrappers < 7.6-28
 
@@ -100,6 +101,11 @@ Conflicts:	tcp_wrappers < 7.6-28
 Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
+
+%description -n libwrap-libs -l pl
+Biblioteka wrappera bezpieczeñstwa zawieraj±ca implementacjê kontroli
+dostêpu bazuj±c± na jêzyku regu³, opcjonalnie z komendami pow³oki
+wykowywanymi zale¿nie od ustawionej regu³ki.
 
 %package -n libwrap-devel
 Summary:	Header file and documentation for security wrapper access control library
