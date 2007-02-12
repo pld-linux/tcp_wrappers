@@ -1,12 +1,12 @@
 Summary:	Security wrapper for tcp daemons
-Summary(de.UTF-8):   Sicherheitspackung für tcp-Dämonen
-Summary(es.UTF-8):   Programa de seguridad para daemons tcp
-Summary(fr.UTF-8):   Enveloppe de sécurité pour les démons tcp
-Summary(pl.UTF-8):   Wrapper bezpieczeństwa dla demonów tcp
-Summary(pt_BR.UTF-8):   Programa de segurança para daemons tcp
-Summary(ru.UTF-8):   Security wrapper для tcp-демонов
-Summary(tr.UTF-8):   TCP süreçleri için güvenlik sarmalayıcısı
-Summary(uk.UTF-8):   Security wrapper для tcp-демонів
+Summary(de.UTF-8):	Sicherheitspackung für tcp-Dämonen
+Summary(es.UTF-8):	Programa de seguridad para daemons tcp
+Summary(fr.UTF-8):	Enveloppe de sécurité pour les démons tcp
+Summary(pl.UTF-8):	Wrapper bezpieczeństwa dla demonów tcp
+Summary(pt_BR.UTF-8):	Programa de segurança para daemons tcp
+Summary(ru.UTF-8):	Security wrapper для tcp-демонов
+Summary(tr.UTF-8):	TCP süreçleri için güvenlik sarmalayıcısı
+Summary(uk.UTF-8):	Security wrapper для tcp-демонів
 Name:		tcp_wrappers
 Version:	7.6
 Release:	41
@@ -73,9 +73,9 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та інших
 
 %package -n libwrap
 Summary:	Security wrapper access control library
-Summary(pl.UTF-8):   Biblioteka wrappera bezpieczeństwa
-Summary(ru.UTF-8):   Security wrapper для tcp-демонов. Библиотеки разработчика и хедера
-Summary(uk.UTF-8):   Security wrapper для tcp-демонів. Бібліотеки програміста та хедери
+Summary(pl.UTF-8):	Biblioteka wrappera bezpieczeństwa
+Summary(ru.UTF-8):	Security wrapper для tcp-демонов. Библиотеки разработчика и хедера
+Summary(uk.UTF-8):	Security wrapper для tcp-демонів. Бібліотеки програміста та хедери
 Group:		Libraries
 Requires(post):	fileutils
 Requires:	libwrap-libs = %{version}-%{release}
@@ -93,7 +93,7 @@ wykowywanymi zależnie od ustawionej regułki.
 
 %package -n libwrap-libs
 Summary:	Security wrapper access control library
-Summary(pl.UTF-8):   Biblioteka wrappera bezpieczeństwa
+Summary(pl.UTF-8):	Biblioteka wrappera bezpieczeństwa
 Group:		Libraries
 Conflicts:	tcp_wrappers < 7.6-28
 
@@ -109,7 +109,7 @@ wykowywanymi zależnie od ustawionej regułki.
 
 %package -n libwrap-devel
 Summary:	Header file and documentation for security wrapper access control library
-Summary(pl.UTF-8):   Plik nagłówkowy i dokumentacja do biblioteki wrappera bezpieczeństwa
+Summary(pl.UTF-8):	Plik nagłówkowy i dokumentacja do biblioteki wrappera bezpieczeństwa
 Group:		Development/Libraries
 Requires:	libwrap-libs = %{version}-%{release}
 
@@ -143,10 +143,10 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та інших
 
 %package -n libwrap-static
 Summary:	Security wrapper access control library (static version)
-Summary(pl.UTF-8):   Biblioteki wrappera bezpieczeństwa (wersja statyczna)
-Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusão para desenvolvimento com tcp_wrappers
-Summary(ru.UTF-8):   Security wrapper для tcp-демонов. Статические библиотеки
-Summary(uk.UTF-8):   Security wrapper для tcp-демонів. Статичні бібліотеки
+Summary(pl.UTF-8):	Biblioteki wrappera bezpieczeństwa (wersja statyczna)
+Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento com tcp_wrappers
+Summary(ru.UTF-8):	Security wrapper для tcp-демонов. Статические библиотеки
+Summary(uk.UTF-8):	Security wrapper для tcp-демонів. Статичні бібліотеки
 Group:		Development/Libraries
 Requires:	libwrap-devel = %{version}-%{release}
 
