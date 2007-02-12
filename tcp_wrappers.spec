@@ -1,12 +1,12 @@
 Summary:	Security wrapper for tcp daemons
-Summary(de):	Sicherheitspackung fЭr tcp-DДmonen
-Summary(es):	Programa de seguridad para daemons tcp
-Summary(fr):	Enveloppe de sИcuritИ pour les dИmons tcp
-Summary(pl):	Wrapper bezpieczeЯstwa dla demonСw tcp
-Summary(pt_BR):	Programa de seguranГa para daemons tcp
-Summary(ru):	Security wrapper для tcp-демонов
-Summary(tr):	TCP sЭreГleri iГin gЭvenlik sarmalayЩcЩsЩ
-Summary(uk):	Security wrapper для tcp-демон╕в
+Summary(de.UTF-8):   Sicherheitspackung fц╪r tcp-Dц╓monen
+Summary(es.UTF-8):   Programa de seguridad para daemons tcp
+Summary(fr.UTF-8):   Enveloppe de sц╘curitц╘ pour les dц╘mons tcp
+Summary(pl.UTF-8):   Wrapper bezpieczeе└stwa dla demonцЁw tcp
+Summary(pt_BR.UTF-8):   Programa de seguranц╖a para daemons tcp
+Summary(ru.UTF-8):   Security wrapper п╢п╩я▐ tcp-п╢п╣п╪п╬п╫п╬п╡
+Summary(tr.UTF-8):   TCP sц╪reц╖leri iц╖in gц╪venlik sarmalayд╠cд╠sд╠
+Summary(uk.UTF-8):   Security wrapper п╢п╩я▐ tcp-п╢п╣п╪п╬п╫я√п╡
 Name:		tcp_wrappers
 Version:	7.6
 Release:	41
@@ -36,46 +36,46 @@ With this package you can monitor and filter incoming requests for the
 SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, and other
 network services.
 
-%description -l es
+%description -l es.UTF-8
 Con este paquete puedes monitorar y filtrar llamadas de SYSTAT,
 FINGER, FTP, TElNET, RLOGIN, RSH, EXEC, TFTP, TALK, y otros servicios
 de red.
 
-%description -l fr
-Avec ce paquetage, vous pouvez gИrer et filtrer les requЙtes entrantes
+%description -l fr.UTF-8
+Avec ce paquetage, vous pouvez gц╘rer et filtrer les requц╙tes entrantes
 pour SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK et
-autres services rИseau.
+autres services rц╘seau.
 
-%description -l pl
-Przy pomocy tego pakietu mo©na monitorowaФ i filtrowaФ nadchodz╠ce
-©╠dania SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK i
-innych usЁug sieciowych.
+%description -l pl.UTF-8
+Przy pomocy tego pakietu moе╪na monitorowaд┤ i filtrowaд┤ nadchodzд┘ce
+е╪д┘dania SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK i
+innych usе┌ug sieciowych.
 
-%description -l pt_BR
-Com este pacote vocЙ pode monitorar e filtrar chamadas de SYSTAT,
-FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, e outros serviГos
+%description -l pt_BR.UTF-8
+Com este pacote vocц╙ pode monitorar e filtrar chamadas de SYSTAT,
+FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK, e outros serviц╖os
 de rede.
 
-%description -l ru
-Этот пакет позволяет отслеживать и фильтровать входящие запросы к
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK и другим
-сетевым сервисам.
+%description -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ п©п╬п╥п╡п╬п╩я▐п╣я┌ п╬я┌я│п╩п╣п╤п╦п╡п╟я┌я▄ п╦ я└п╦п╩я▄я┌я─п╬п╡п╟я┌я▄ п╡я┘п╬п╢я▐я┴п╦п╣ п╥п╟п©я─п╬я│я▀ п╨
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK п╦ п╢я─я┐пЁп╦п╪
+я│п╣я┌п╣п╡я▀п╪ я│п╣я─п╡п╦я│п╟п╪.
 
-%description -l tr
+%description -l tr.UTF-8
 Bu paket, SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK
-ve diПer aП hizmetleri iГin gelen istekleri izlemenizi ve isteПinize
-gЖre sЭzmenizi saПlar.
+ve diд÷er aд÷ hizmetleri iц╖in gelen istekleri izlemenizi ve isteд÷inize
+gц╤re sц╪zmenizi saд÷lar.
 
-%description -l uk
-kЦей пакет дозволя╓ в╕дсл╕дковувати та ф╕льтрувати вх╕дн╕ запити до
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та ╕нших
-мережевих серв╕с╕в.
+%description -l uk.UTF-8
+kп╕п╣п╧ п©п╟п╨п╣я┌ п╢п╬п╥п╡п╬п╩я▐я■ п╡я√п╢я│п╩я√п╢п╨п╬п╡я┐п╡п╟я┌п╦ я┌п╟ я└я√п╩я▄я┌я─я┐п╡п╟я┌п╦ п╡я┘я√п╢п╫я√ п╥п╟п©п╦я┌п╦ п╢п╬
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK я┌п╟ я√п╫я┬п╦я┘
+п╪п╣я─п╣п╤п╣п╡п╦я┘ я│п╣я─п╡я√я│я√п╡.
 
 %package -n libwrap
 Summary:	Security wrapper access control library
-Summary(pl):	Biblioteka wrappera bezpieczeЯstwa
-Summary(ru):	Security wrapper для tcp-демонов. Библиотеки разработчика и хедера
-Summary(uk):	Security wrapper для tcp-демон╕в. Б╕бл╕отеки програм╕ста та хедери
+Summary(pl.UTF-8):   Biblioteka wrappera bezpieczeе└stwa
+Summary(ru.UTF-8):   Security wrapper п╢п╩я▐ tcp-п╢п╣п╪п╬п╫п╬п╡. п▒п╦п╠п╩п╦п╬я┌п╣п╨п╦ я─п╟п╥я─п╟п╠п╬я┌я┤п╦п╨п╟ п╦ я┘п╣п╢п╣я─п╟
+Summary(uk.UTF-8):   Security wrapper п╢п╩я▐ tcp-п╢п╣п╪п╬п╫я√п╡. п▒я√п╠п╩я√п╬я┌п╣п╨п╦ п©я─п╬пЁя─п╟п╪я√я│я┌п╟ я┌п╟ я┘п╣п╢п╣я─п╦
 Group:		Libraries
 Requires(post):	fileutils
 Requires:	libwrap-libs = %{version}-%{release}
@@ -86,14 +86,14 @@ Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -n libwrap -l pl
-Biblioteka wrappera bezpieczeЯstwa zawieraj╠ca implementacjЙ kontroli
-dostЙpu bazuj╠c╠ na jЙzyku reguЁ, opcjonalnie z komendami powЁoki
-wykowywanymi zale©nie od ustawionej reguЁki.
+%description -n libwrap -l pl.UTF-8
+Biblioteka wrappera bezpieczeе└stwa zawierajд┘ca implementacjд≥ kontroli
+dostд≥pu bazujд┘cд┘ na jд≥zyku reguе┌, opcjonalnie z komendami powе┌oki
+wykowywanymi zaleе╪nie od ustawionej reguе┌ki.
 
 %package -n libwrap-libs
 Summary:	Security wrapper access control library
-Summary(pl):	Biblioteka wrappera bezpieczeЯstwa
+Summary(pl.UTF-8):   Biblioteka wrappera bezpieczeе└stwa
 Group:		Libraries
 Conflicts:	tcp_wrappers < 7.6-28
 
@@ -102,14 +102,14 @@ Security wrapper access control library which implement a rule-based
 access control language with optional shell commands that are executed
 when a rule fires.
 
-%description -n libwrap-libs -l pl
-Biblioteka wrappera bezpieczeЯstwa zawieraj╠ca implementacjЙ kontroli
-dostЙpu bazuj╠c╠ na jЙzyku reguЁ, opcjonalnie z komendami powЁoki
-wykowywanymi zale©nie od ustawionej reguЁki.
+%description -n libwrap-libs -l pl.UTF-8
+Biblioteka wrappera bezpieczeе└stwa zawierajд┘ca implementacjд≥ kontroli
+dostд≥pu bazujд┘cд┘ na jд≥zyku reguе┌, opcjonalnie z komendami powе┌oki
+wykowywanymi zaleе╪nie od ustawionej reguе┌ki.
 
 %package -n libwrap-devel
 Summary:	Header file and documentation for security wrapper access control library
-Summary(pl):	Plik nagЁСwkowy i dokumentacja do biblioteki wrappera bezpieczeЯstwa
+Summary(pl.UTF-8):   Plik nagе┌цЁwkowy i dokumentacja do biblioteki wrappera bezpieczeе└stwa
 Group:		Development/Libraries
 Requires:	libwrap-libs = %{version}-%{release}
 
@@ -119,34 +119,34 @@ wrapper access control library which implement a rule-based access
 control language with optional shell commands that are executed when a
 rule fires.
 
-%description -n libwrap-devel -l pl
-Plik nagЁСwkowy i dokumentacja programisty do libwrap - biblioteki
-wrappera bezpieczeЯstwa zawieraj╠cej implementacjЙ kontroli dostЙpu
-bazuj╠c╠ na jЙzyku reguЁ, opcjonalnie z komendami powЁoki wykowywanymi
-zale©nie od ustawionej reguЁki.
+%description -n libwrap-devel -l pl.UTF-8
+Plik nagе┌цЁwkowy i dokumentacja programisty do libwrap - biblioteki
+wrappera bezpieczeе└stwa zawierajд┘cej implementacjд≥ kontroli dostд≥pu
+bazujд┘cд┘ na jд≥zyku reguе┌, opcjonalnie z komendami powе┌oki wykowywanymi
+zaleе╪nie od ustawionej reguе┌ki.
 
-%description -n libwrap-devel -l ru
-Этот пакет позволяет отслеживать и фильтровать входящие запросы к
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK и другим
-сетевым сервисам.
+%description -n libwrap-devel -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ п©п╬п╥п╡п╬п╩я▐п╣я┌ п╬я┌я│п╩п╣п╤п╦п╡п╟я┌я▄ п╦ я└п╦п╩я▄я┌я─п╬п╡п╟я┌я▄ п╡я┘п╬п╢я▐я┴п╦п╣ п╥п╟п©я─п╬я│я▀ п╨
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK п╦ п╢я─я┐пЁп╦п╪
+я│п╣я┌п╣п╡я▀п╪ я│п╣я─п╡п╦я│п╟п╪.
 
-Это библиотеки разработчика и хедера, необходимые для разработки
-программ, использующих библиотеки tcp-wrapper'а.
+п╜я┌п╬ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ я─п╟п╥я─п╟п╠п╬я┌я┤п╦п╨п╟ п╦ я┘п╣п╢п╣я─п╟, п╫п╣п╬п╠я┘п╬п╢п╦п╪я▀п╣ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦
+п©я─п╬пЁя─п╟п╪п╪, п╦я│п©п╬п╩я▄п╥я┐я▌я┴п╦я┘ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ tcp-wrapper'п╟.
 
-%description -n libwrap-devel -l uk
-Цей пакет дозволя╓ в╕дсл╕дковувати та ф╕льтрувати вх╕дн╕ запити до
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та ╕нших
-мережевих серв╕с╕в.
+%description -n libwrap-devel -l uk.UTF-8
+п╕п╣п╧ п©п╟п╨п╣я┌ п╢п╬п╥п╡п╬п╩я▐я■ п╡я√п╢я│п╩я√п╢п╨п╬п╡я┐п╡п╟я┌п╦ я┌п╟ я└я√п╩я▄я┌я─я┐п╡п╟я┌п╦ п╡я┘я√п╢п╫я√ п╥п╟п©п╦я┌п╦ п╢п╬
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK я┌п╟ я√п╫я┬п╦я┘
+п╪п╣я─п╣п╤п╣п╡п╦я┘ я│п╣я─п╡я√я│я√п╡.
 
-Це б╕бл╕отеки програм╕ста та хедери, необх╕дн╕ для розробки програм,
-як╕ використовують б╕бл╕отеки tcp-wrapper'а.
+п╕п╣ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ п©я─п╬пЁя─п╟п╪я√я│я┌п╟ я┌п╟ я┘п╣п╢п╣я─п╦, п╫п╣п╬п╠я┘я√п╢п╫я√ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪,
+я▐п╨я√ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ tcp-wrapper'п╟.
 
 %package -n libwrap-static
 Summary:	Security wrapper access control library (static version)
-Summary(pl):	Biblioteki wrappera bezpieczeЯstwa (wersja statyczna)
-Summary(pt_BR):	Bibliotecas e arquivos de inclusЦo para desenvolvimento com tcp_wrappers
-Summary(ru):	Security wrapper для tcp-демонов. Статические библиотеки
-Summary(uk):	Security wrapper для tcp-демон╕в. Статичн╕ б╕бл╕отеки
+Summary(pl.UTF-8):   Biblioteki wrappera bezpieczeе└stwa (wersja statyczna)
+Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusцёo para desenvolvimento com tcp_wrappers
+Summary(ru.UTF-8):   Security wrapper п╢п╩я▐ tcp-п╢п╣п╪п╬п╫п╬п╡. п║я┌п╟я┌п╦я┤п╣я│п╨п╦п╣ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦
+Summary(uk.UTF-8):   Security wrapper п╢п╩я▐ tcp-п╢п╣п╪п╬п╫я√п╡. п║я┌п╟я┌п╦я┤п╫я√ п╠я√п╠п╩я√п╬я┌п╣п╨п╦
 Group:		Development/Libraries
 Requires:	libwrap-devel = %{version}-%{release}
 
@@ -155,31 +155,31 @@ Static version of libwrap, security wrapper access control library
 which implement a rule-based access control language with optional
 shell commands that are executed when a rule fires.
 
-%description -n libwrap-static -l pl
-Statyczna wersja libwrap - biblioteki wrappera bezpieczeЯstwa
-zawieraj╠cej implementacjЙ kontroli dostЙpu bazuj╠c╠ na jЙzyku reguЁ,
-opcjonalnie z komendami powЁoki wykowywanymi zale©nie od ustawionej
-reguЁki.
+%description -n libwrap-static -l pl.UTF-8
+Statyczna wersja libwrap - biblioteki wrappera bezpieczeе└stwa
+zawierajд┘cej implementacjд≥ kontroli dostд≥pu bazujд┘cд┘ na jд≥zyku reguе┌,
+opcjonalnie z komendami powе┌oki wykowywanymi zaleе╪nie od ustawionej
+reguе┌ki.
 
-%description -n libwrap-static -l pt_BR
+%description -n libwrap-static -l pt_BR.UTF-8
 Bibliotecas e arquivos de inclusao para desenvolvimento com
 tcp_wrappers.
 
-%description -n libwrap-static -l ru
-Этот пакет позволяет отслеживать и фильтровать входящие запросы к
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK и другим
-сетевым сервисам.
+%description -n libwrap-static -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ п©п╬п╥п╡п╬п╩я▐п╣я┌ п╬я┌я│п╩п╣п╤п╦п╡п╟я┌я▄ п╦ я└п╦п╩я▄я┌я─п╬п╡п╟я┌я▄ п╡я┘п╬п╢я▐я┴п╦п╣ п╥п╟п©я─п╬я│я▀ п╨
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK п╦ п╢я─я┐пЁп╦п╪
+я│п╣я┌п╣п╡я▀п╪ я│п╣я─п╡п╦я│п╟п╪.
 
-Это статические библиотеки, необходимые для разработки программ,
-использующих библиотеки tcp-wrapper'а.
+п╜я┌п╬ я│я┌п╟я┌п╦я┤п╣я│п╨п╦п╣ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦, п╫п╣п╬п╠я┘п╬п╢п╦п╪я▀п╣ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ п©я─п╬пЁя─п╟п╪п╪,
+п╦я│п©п╬п╩я▄п╥я┐я▌я┴п╦я┘ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ tcp-wrapper'п╟.
 
-%description -n libwrap-static -l uk
-Цей пакет дозволя╓ в╕дсл╕дковувати та ф╕льтрувати вх╕дн╕ запити до
-SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та ╕нших
-мережевих серв╕с╕в.
+%description -n libwrap-static -l uk.UTF-8
+п╕п╣п╧ п©п╟п╨п╣я┌ п╢п╬п╥п╡п╬п╩я▐я■ п╡я√п╢я│п╩я√п╢п╨п╬п╡я┐п╡п╟я┌п╦ я┌п╟ я└я√п╩я▄я┌я─я┐п╡п╟я┌п╦ п╡я┘я√п╢п╫я√ п╥п╟п©п╦я┌п╦ п╢п╬
+SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK я┌п╟ я√п╫я┬п╦я┘
+п╪п╣я─п╣п╤п╣п╡п╦я┘ я│п╣я─п╡я√я│я√п╡.
 
-Це статичн╕ б╕бл╕отеки, необх╕дн╕ для розробки програм, як╕
-використовують б╕бл╕отеки tcp-wrapper'а.
+п╕п╣ я│я┌п╟я┌п╦я┤п╫я√ п╠я√п╠п╩я√п╬я┌п╣п╨п╦, п╫п╣п╬п╠я┘я√п╢п╫я√ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪, я▐п╨я√
+п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ tcp-wrapper'п╟.
 
 %prep
 %setup -q -n %{name}_%{version}
