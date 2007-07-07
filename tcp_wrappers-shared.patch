@@ -21,7 +21,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  # System dependencies: TLI (transport-level interface) support.
  # 
  # Uncomment the following macro if your system has System V.4-style TLI
-@@ -670,9 +674,11 @@
+@@ -670,7 +674,9 @@
  # Protection against weird shells or weird make programs.
  
  SHELL	= /bin/sh
@@ -30,11 +30,8 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
 +
 +%.lo:;	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $*.c
  
--CFLAGS	= -O -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
-+CFLAGS	= -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
+ CFLAGS	= -O -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
  	$(BUGS) $(SYSTYPE) $(AUTH) $(UMASK) \
- 	-DREAL_DAEMON_DIR=\"$(REAL_DAEMON_DIR)\" $(STYLE) $(KILL_OPT) \
- 	-DSEVERITY=$(SEVERITY) -DRFC931_TIMEOUT=$(RFC931_TIMEOUT) \
 @@ -679,12 +685,12 @@
  	$(UCHAR) $(TABLES) $(STRINGS) $(TLI) $(EXTRA_CFLAGS) $(DOT) \
  	$(VSYSLOG) $(HOSTNAME)
@@ -68,7 +65,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  	rm -f $(LIB)
 -	$(AR) $(ARFLAGS) $(LIB) $(LIB_OBJ)
 -	-$(RANLIB) $(LIB)
-+	$(LIBTOOL) --mode=link $(CC) -o $(LDFLAGS) $(LIB) $(LIB_OBJ) -rpath $(LIBDIR)
++	$(LIBTOOL) --mode=link $(CC) -o $(LIB) $(LIB_OBJ) $(LDFLAGS) $(LIBS) -rpath $(LIBDIR)
  
  tcpd:	tcpd.o $(LIB)
 -	$(CC) $(CFLAGS) -o $@ tcpd.o $(LIB) $(LIBS)
