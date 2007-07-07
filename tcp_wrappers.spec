@@ -17,24 +17,22 @@ Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
 Source1:	hosts.allow
 Source2:	hosts.deny
 Patch0:		%{name}-usagi-ipv6.patch
-Patch1:		%{name}-fix.patch
+Patch1:		%{name}-shared.patch
 Patch2:		%{name}-bug11881.patch
 Patch3:		%{name}-bug17795.patch
 Patch4:		%{name}-bug17847.patch
 Patch5:		%{name}-fixgethostbyname.patch
 Patch6:		%{name}-alarm.patch
 Patch7:		%{name}-man_fixes.patch
-Patch8:		%{name}-weak-severity.patch
-Patch9:		%{name}-libdir.patch
-Patch10:	%{name}-libtool.patch
-Patch11:	%{name}-162412.patch
-Patch12:	%{name}-196326.patch
-Patch13:	%{name}-sig.patch
-Patch14:	%{name}-strerror.patch
-Patch15:	%{name}-sigchld.patch
-Patch16:	%{name}-220015.patch
-Patch17:	%{name}-safe_finger.patch
-Patch18:	%{name}-docs.patch
+Patch8:		%{name}-162412.patch
+Patch9:		%{name}-196326.patch
+Patch10:	%{name}-sig.patch
+Patch11:	%{name}-strerror.patch
+Patch12:	%{name}-sigchld.patch
+Patch13:	%{name}-safe_finger.patch
+Patch14:	%{name}-docs.patch
+Patch15:	%{name}-220015.patch
+Patch16:	%{name}-Makefile.patch
 BuildRequires:	libtool
 Requires:	libwrap = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -192,7 +190,7 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та інших
 %prep
 %setup -q -n %{name}_%{version}
 %patch0 -p0
-#%patch1 -p1
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -208,15 +206,14 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та інших
 %patch14 -p1
 %patch15 -p1
 %patch16 -p1
-%patch17 -p1
-%patch18 -p1
 
 %build
 %{__make} linux \
 	CC="%{__cc}" \
 	PREFIX=%{_prefix} \
 	LIBDIR=%{_libdir} \
-	RPM_OPT_FLAGS="%{rpmcflags}"
+	RPM_OPT_FLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
