@@ -1,0 +1,12 @@
+- uninitialized variable was checked for NULL
+--- tcp_wrappers_7.6/inetcf.c.162412	2006-01-24 15:33:20.000000000 +0100
++++ tcp_wrappers_7.6/inetcf.c	2006-01-24 15:35:44.000000000 +0100
+@@ -61,7 +61,7 @@
+ char   *conf;
+ {
+     char    buf[BUFSIZ];
+-    FILE   *fp;
++    FILE   *fp = NULL;
+     char   *service;
+     char   *protocol;
+     char   *user;

@@ -1,0 +1,13 @@
+- don't bother resolving localhost, as it gives weird results in mixed IPv4/IPV6 environments
+--- tcp_wrappers_7.6/hosts_access.c.196326	2007-06-28 13:44:10.000000000 +0200
++++ tcp_wrappers_7.6/hosts_access.c	2007-06-28 15:33:45.000000000 +0200
+@@ -346,6 +346,9 @@
+ 	return (STR_NE(string, unknown));
+     } else if (tok[(n = strlen(tok)) - 1] == '.') {	/* prefix */
+ 	return (STRN_EQ(tok, string, n));
++    } else if ((STR_EQ(tok, "localhost") || STR_EQ(tok, "localhost.localdomain"))
++	    && (STR_EQ(string, "localhost") || STR_EQ(string, "localhost.localdomain"))) {
++	return (YES); /* these localhosts are equivalent */
+     } else {					/* exact match */
+ #ifdef INET6
+ 	struct addrinfo hints, *res;
