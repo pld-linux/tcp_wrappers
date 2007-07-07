@@ -1,0 +1,324 @@
+diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
+--- tcp_wrappers_7.6.orig/Makefile	Mon Dec 13 13:58:15 1999
++++ tcp_wrappers_7.6/Makefile	Mon Dec 13 14:07:48 1999
+@@ -152,7 +152,7 @@
+ linux:
+ 	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
+ 	LIBS= RANLIB=ranlib ARFLAGS=rv AUX_OBJ=setenv.o \
+-	NETGROUP= TLI= EXTRA_CFLAGS="-DBROKEN_SO_LINGER -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len" all
++	NETGROUP= TLI= EXTRA_CFLAGS="-DHAVE_WEAKSYMS -DBROKEN_SO_LINGER -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len" all
+ 
+ linux-old:
+ 	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
+@@ -373,6 +374,10 @@
+ 	NETGROUP= TLI= all
+ 
+ ###############################################################
++LIBTOOL = libtool
++PREFIX  = /usr/local
++LIBDIR	= $(PREFIX)/lib
++###############################################################
+ # System dependencies: TLI (transport-level interface) support.
+ # 
+ # Uncomment the following macro if your system has System V.4-style TLI
+@@ -670,9 +674,11 @@
+ # Protection against weird shells or weird make programs.
+ 
+ SHELL	= /bin/sh
+-.c.o:;	$(CC) $(CFLAGS) -c $*.c
++.c.o:;	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $*.c
++
++%.lo:;	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $*.c
+ 
+-CFLAGS	= -O -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
++CFLAGS	= -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
+ 	$(BUGS) $(SYSTYPE) $(AUTH) $(UMASK) \
+ 	-DREAL_DAEMON_DIR=\"$(REAL_DAEMON_DIR)\" $(STYLE) $(KILL_OPT) \
+ 	-DSEVERITY=$(SEVERITY) -DRFC931_TIMEOUT=$(RFC931_TIMEOUT) \
+@@ -679,12 +685,12 @@
+ 	$(UCHAR) $(TABLES) $(STRINGS) $(TLI) $(EXTRA_CFLAGS) $(DOT) \
+ 	$(VSYSLOG) $(HOSTNAME)
+ 
+-LIB_OBJ= hosts_access.o options.o shell_cmd.o rfc931.o eval.o \
+-	hosts_ctl.o refuse.o percent_x.o clean_exit.o $(AUX_OBJ) \
+-	$(FROM_OBJ) fix_options.o socket.o tli.o workarounds.o \
+-	update.o misc.o diag.o percent_m.o myvsyslog.o
++LIB_OBJ= hosts_access.lo options.lo shell_cmd.lo rfc931.lo eval.lo \
++	hosts_ctl.lo refuse.lo percent_x.lo clean_exit.lo $(AUX_OBJ) \
++	$(FROM_OBJ) fix_options.lo socket.lo tli.lo workarounds.lo \
++	update.lo misc.lo diag.lo percent_m.lo myvsyslog.lo weak_symbols.lo
+ 
+-FROM_OBJ= fromhost.o
++FROM_OBJ= fromhost.lo
+ 
+ KIT	= README miscd.c tcpd.c fromhost.c hosts_access.c shell_cmd.c \
+ 	tcpd.h tcpdmatch.c Makefile hosts_access.5 strcasecmp.c BLURB rfc931.c \
+@@ -697,7 +703,7 @@
+ 	refuse.c tcpdchk.8 setenv.c inetcf.c inetcf.h scaffold.c \
+ 	scaffold.h tcpdmatch.8 README.NIS
+ 
+-LIB	= libwrap.a
++LIB	= libwrap.la
+ 
+ all other: config-check tcpd tcpdmatch try-from safe_finger tcpdchk
+ 
+@@ -713,30 +719,29 @@
+ 
+ $(LIB):	$(LIB_OBJ)
+ 	rm -f $(LIB)
+-	$(AR) $(ARFLAGS) $(LIB) $(LIB_OBJ)
+-	-$(RANLIB) $(LIB)
++	$(LIBTOOL) --mode=link $(CC) -o $(LDFLAGS) $(LIB) $(LIB_OBJ) -rpath $(LIBDIR)
+ 
+ tcpd:	tcpd.o $(LIB)
+-	$(CC) $(CFLAGS) -o $@ tcpd.o $(LIB) $(LIBS)
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ tcpd.o $(LDFLAGS) $(LIB) $(LIBS)
+ 
+ miscd:	miscd.o $(LIB)
+-	$(CC) $(CFLAGS) -o $@ miscd.o $(LIB) $(LIBS)
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ miscd.o $(LDFLAGS) $(LIB) $(LIBS)
+ 
+ safe_finger: safe_finger.o $(LIB)
+-	$(CC) $(CFLAGS) -o $@ safe_finger.o $(LIB) $(LIBS)
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ safe_finger.o $(LDFLAGS) $(LIB) $(LIBS)
+ 
+ TCPDMATCH_OBJ = tcpdmatch.o fakelog.o inetcf.o scaffold.o
+ 
+ tcpdmatch: $(TCPDMATCH_OBJ) $(LIB)
+-	$(CC) $(CFLAGS) -o $@ $(TCPDMATCH_OBJ) $(LIB) $(LIBS)
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ $(TCPDMATCH_OBJ) $(LDFLAGS) $(LIB) $(LIBS)
+ 
+ try-from: try-from.o fakelog.o $(LIB)
+-	$(CC) $(CFLAGS) -o $@ try-from.o fakelog.o $(LIB) $(LIBS)
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ try-from.o fakelog.o $(LDFLAGS) $(LIB) $(LIBS)
+ 
+ TCPDCHK_OBJ = tcpdchk.o fakelog.o inetcf.o scaffold.o
+ 
+ tcpdchk: $(TCPDCHK_OBJ) $(LIB)
+-	$(CC) $(CFLAGS) -o $@ $(TCPDCHK_OBJ) $(LIB) $(LIBS)
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ $(TCPDCHK_OBJ) $(LDFLAGS) $(LIB) $(LIBS)
+ 
+ shar:	$(KIT)
+ 	@shar $(KIT)
+@@ -757,6 +762,14 @@
+ tidy:	clean
+ 	chmod -R a+r .
+ 	chmod 755 .
++
++install:
++	-install -d $(PREFIX)/{sbin,include}
++	$(LIBTOOL) --mode=install install -c $(LIB) $(LIBDIR)/$(LIB)
++	$(LIBTOOL) --mode=finish $(LIBDIR)
++	for PROG in safe_finger tcpdchk try-from tcpd tcpdmatch ; do \
++		$(LIBTOOL) --mode=install install -c $$PROG $(PREFIX)/sbin/$$PROG ; done
++	install tcpd.h $(PREFIX)/include/
+ 
+ # Enable all bells and whistles for linting.
+ 
+@@ -906,5 +913,6 @@
+ update.o: mystdarg.h
+ update.o: tcpd.h
+ vfprintf.o: cflags
++weak_symbols.o: tcpd.h
+ workarounds.o: cflags
+ workarounds.o: tcpd.h
+--- tcp_wrappers_7.6/tcpd.h.shared	2003-02-10 20:12:26.000000000 +0100
++++ tcp_wrappers_7.6/tcpd.h	2003-02-10 20:12:26.000000000 +0100
+@@ -4,6 +4,25 @@
+   * Author: Wietse Venema, Eindhoven University of Technology, The Netherlands.
+   */
+ 
++#ifndef _TCPWRAPPERS_TCPD_H
++#define _TCPWRAPPERS_TCPD_H
++
++/* someone else may have defined this */
++#undef  __P
++
++/* use prototypes if we have an ANSI C compiler or are using C++ */
++#if defined(__STDC__) || defined(__cplusplus)
++#define __P(args)       args
++#else
++#define __P(args)       ()
++#endif
++
++/* Need definitions of struct sockaddr_in and FILE. */
++#include <netinet/in.h>
++#include <stdio.h>
++
++__BEGIN_DECLS
++
+ /* Structure to describe one communications endpoint. */
+ 
+ #define STRING_LENGTH	128		/* hosts, users, processes */
+@@ -29,10 +48,10 @@
+     char    pid[10];			/* access via eval_pid(request) */
+     struct host_info client[1];		/* client endpoint info */
+     struct host_info server[1];		/* server endpoint info */
+-    void  (*sink) ();			/* datagram sink function or 0 */
+-    void  (*hostname) ();		/* address to printable hostname */
+-    void  (*hostaddr) ();		/* address to printable address */
+-    void  (*cleanup) ();		/* cleanup function or 0 */
++    void  (*sink) __P((int));		/* datagram sink function or 0 */
++    void  (*hostname) __P((struct host_info *)); /* address to printable hostname */
++    void  (*hostaddr) __P((struct host_info *)); /* address to printable address */
++    void  (*cleanup) __P((struct request_info *)); /* cleanup function or 0 */
+     struct netconfig *config;		/* netdir handle */
+ };
+ 
+@@ -65,25 +84,34 @@
+ /* Global functions. */
+ 
+ #if defined(TLI) || defined(PTX) || defined(TLI_SEQUENT)
+-extern void fromhost();			/* get/validate client host info */
++extern void fromhost __P((struct request_info *));	/* get/validate client host info */
+ #else
+ #define fromhost sock_host		/* no TLI support needed */
+ #endif
+ 
+-extern int hosts_access();		/* access control */
+-extern void shell_cmd();		/* execute shell command */
+-extern char *percent_x();		/* do %<char> expansion */
+-extern void rfc931();			/* client name from RFC 931 daemon */
+-extern void clean_exit();		/* clean up and exit */
+-extern void refuse();			/* clean up and exit */
+-extern char *xgets();			/* fgets() on steroids */
+-extern char *split_at();		/* strchr() and split */
+-extern unsigned long dot_quad_addr();	/* restricted inet_addr() */
++extern void shell_cmd __P((char *));	/* execute shell command */
++extern char *percent_x __P((char *, int, char *, struct request_info *)); /* do %<char> expansion */
++#ifdef INET6
++extern void rfc931 __P((struct sockaddr *, struct sockaddr *, char *)); /* client name from RFC 931 daemon */
++#else
++extern void rfc931 __P((struct sockaddr_in *, struct sockaddr_in *, char *)); /* client name from RFC 931 daemon */
++#endif
++extern void clean_exit __P((struct request_info *)); /* clean up and exit */
++extern void refuse __P((struct request_info *));	/* clean up and exit */
++extern char *xgets __P((char *, int, FILE *));	/* fgets() on steroids */
++extern char *split_at __P((char *, int));	/* strchr() and split */
++extern unsigned long dot_quad_addr __P((char *)); /* restricted inet_addr() */
+ 
+ /* Global variables. */
+ 
++#ifdef HAVE_WEAKSYMS
++extern int allow_severity __attribute__ ((weak)); /* for connection logging */
++extern int deny_severity __attribute__ ((weak)); /* for connection logging */
++#else
+ extern int allow_severity;		/* for connection logging */
+ extern int deny_severity;		/* for connection logging */
++#endif
++
+ extern char *hosts_allow_table;		/* for verification mode redirection */
+ extern char *hosts_deny_table;		/* for verification mode redirection */
+ extern int hosts_access_verbose;	/* for verbose matching mode */
+@@ -96,9 +124,14 @@
+   */
+ 
+ #ifdef __STDC__
++extern int hosts_access(struct request_info *request);
++extern int hosts_ctl(char *daemon, char *client_name, char *client_addr, 
++                     char *client_user);
+ extern struct request_info *request_init(struct request_info *,...);
+ extern struct request_info *request_set(struct request_info *,...);
+ #else
++extern int hosts_access();
++extern int hosts_ctl();
+ extern struct request_info *request_init();	/* initialize request */
+ extern struct request_info *request_set();	/* update request structure */
+ #endif
+@@ -121,27 +154,31 @@
+   * host_info structures serve as caches for the lookup results.
+   */
+ 
+-extern char *eval_user();		/* client user */
+-extern char *eval_hostname();		/* printable hostname */
+-extern char *eval_hostaddr();		/* printable host address */
+-extern char *eval_hostinfo();		/* host name or address */
+-extern char *eval_client();		/* whatever is available */
+-extern char *eval_server();		/* whatever is available */
++extern char *eval_user __P((struct request_info *));	/* client user */
++extern char *eval_hostname __P((struct host_info *));	/* printable hostname */
++extern char *eval_hostaddr __P((struct host_info *));	/* printable host address */
++extern char *eval_hostinfo __P((struct host_info *));	/* host name or address */
++extern char *eval_client __P((struct request_info *));	/* whatever is available */
++extern char *eval_server __P((struct request_info *));	/* whatever is available */
+ #define eval_daemon(r)	((r)->daemon)	/* daemon process name */
+ #define eval_pid(r)	((r)->pid)	/* process id */
+ 
+ /* Socket-specific methods, including DNS hostname lookups. */
+ 
+-extern void sock_host();		/* look up endpoint addresses */
+-extern void sock_hostname();		/* translate address to hostname */
+-extern void sock_hostaddr();		/* address to printable address */
++/* look up endpoint addresses */
++extern void sock_host __P((struct request_info *));
++/* translate address to hostname */
++extern void sock_hostname __P((struct host_info *));
++/* address to printable address */
++extern void sock_hostaddr __P((struct host_info *));
++
+ #define sock_methods(r) \
+ 	{ (r)->hostname = sock_hostname; (r)->hostaddr = sock_hostaddr; }
+ 
+ /* The System V Transport-Level Interface (TLI) interface. */
+ 
+ #if defined(TLI) || defined(PTX) || defined(TLI_SEQUENT)
+-extern void tli_host();			/* look up endpoint addresses etc. */
++extern void tli_host __P((struct request_info *));	/* look up endpoint addresses etc. */
+ #endif
+ 
+  /*
+@@ -182,7 +219,7 @@
+   * behavior.
+   */
+ 
+-extern void process_options();		/* execute options */
++extern void process_options __P((char *, struct request_info *)); /* execute options */
+ extern int dry_run;			/* verification flag */
+ 
+ /* Bug workarounds. */
+@@ -221,3 +258,7 @@
+ #define strtok	my_strtok
+ extern char *my_strtok();
+ #endif
++
++__END_DECLS
++
++#endif /* tcpd.h */
+--- tcp_wrappers_7.6/scaffold.c.shared	2003-02-10 20:12:26.000000000 +0100
++++ tcp_wrappers_7.6/scaffold.c	2003-02-10 20:12:26.000000000 +0100
+@@ -237,10 +237,17 @@
+ 
+ /* ARGSUSED */
+ 
+-void    rfc931(request)
+-struct request_info *request;
++void    rfc931(rmt_sin, our_sin, dest)
++#ifndef INET6
++struct sockaddr_in *rmt_sin;
++struct sockaddr_in *our_sin;
++#else
++struct sockaddr *rmt_sin;
++struct sockaddr *our_sin;
++#endif
++char   *dest;
+ {
+-    strcpy(request->user, unknown);
++    strcpy(dest, unknown);
+ }
+ 
+ /* check_path - examine accessibility */
+diff -Nur tcp_wrappers_7.6.orig/weak_symbols.c tcp_wrappers_7.6/weak_symbols.c
+--- tcp_wrappers_7.6.orig/weak_symbols.c	1970-01-01 01:00:00.000000000 +0100
++++ tcp_wrappers_7.6/weak_symbols.c	2003-08-23 07:40:03.717139736 +0200
+@@ -0,0 +1,11 @@
++/*
++ * @(#) weak_symbols.h 1.5 99/12/29 23:50
++ *
++ * Author: Anthony Towns <ajt@debian.org>
++ */
++
++#ifdef HAVE_WEAKSYMS
++#include <syslog.h>
++int deny_severity __attribute__((weak)) = LOG_WARNING;
++int allow_severity __attribute__((weak)) = SEVERITY;
++#endif
