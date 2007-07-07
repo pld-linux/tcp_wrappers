@@ -13,7 +13,7 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
  
  int     rfc931_timeout = RFC931_TIMEOUT;/* Global so it can be changed */
  
--static sigjmp_buf timebuf;
+-static jmp_buf timebuf;
 +struct sigaction oldact;
 +int	restored = 0;
  
@@ -27,7 +27,7 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
 -int     sig;
 +static void timeout(int signum)
  {
--    siglongjmp(timebuf, sig);
+-    longjmp(timebuf, sig);
 +	sigaction(SIGALRM,&oldact,NULL);
 +	restored = 1;
  }
@@ -46,7 +46,7 @@ diff -ur tcp_wrappers_7.6/rfc931.c tcp_wrappers_7.6.alarm/rfc931.c
  	 * Set up a timer so we won't get stuck while waiting for the server.
  	 */
  
--	if (sigsetjmp(timebuf,1) == 0) {
+-	if (setjmp(timebuf) == 0) {
 -	    signal(SIGALRM, timeout);
 -	    alarm(rfc931_timeout);
 +	act.sa_handler = timeout;
