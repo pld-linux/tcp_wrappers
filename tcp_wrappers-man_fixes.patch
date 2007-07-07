@@ -53,7 +53,7 @@ diff -u tcp_wrappers_7.6/hosts_access.5 tcp_wrappers_7.6.new/hosts_access.5
  .in +3
  ALL: some.host.name, .some.domain
  .br
-@@ -330,13 +330,13 @@
+@@ -330,16 +330,16 @@
  host. The result is mailed to the superuser.
  .PP
  .ne 2
@@ -68,7 +68,11 @@ diff -u tcp_wrappers_7.6/hosts_access.5 tcp_wrappers_7.6.new/hosts_access.5
 +/etc/tcpd/hosts.deny:
  .in +3
  .nf
- in.tftpd: ALL: (/some/where/safe_finger -l @%h | \\
+-in.tftpd: ALL: (/some/where/safe_finger -l @%h | \\
++in.tftpd: ALL: spawn (/some/where/safe_finger -l @%h | \\
+ 	/usr/ucb/mail -s %d-%h root) &
+ .fi
+ .PP
 @@ -370,8 +370,8 @@
  .SH FILES
  .na
