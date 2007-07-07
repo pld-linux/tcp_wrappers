@@ -9,14 +9,14 @@ Summary(tr.UTF-8):	TCP süreçleri için güvenlik sarmalayıcısı
 Summary(uk.UTF-8):	Security wrapper для tcp-демонів
 Name:		tcp_wrappers
 Version:	7.6
-Release:	41
+Release:	41.1
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
 # Source0-md5:	e6fa25f71226d090f34de3f6b122fb5a
 Source1:	hosts.allow
 Source2:	hosts.deny
-Patch0:		http://www.imasy.or.jp/~ume/ipv6/%{name}_7.6-ipv6-1.9.diff.gz
+Patch0:		%{name}-usagi-ipv6.patch
 Patch1:		%{name}-fix.patch
 Patch2:		%{name}-bug11881.patch
 Patch3:		%{name}-bug17795.patch
@@ -27,6 +27,14 @@ Patch7:		%{name}-man_fixes.patch
 Patch8:		%{name}-weak-severity.patch
 Patch9:		%{name}-libdir.patch
 Patch10:	%{name}-libtool.patch
+Patch11:	%{name}-162412.patch
+Patch12:	%{name}-196326.patch
+Patch13:	%{name}-sig.patch
+Patch14:	%{name}-strerror.patch
+Patch15:	%{name}-sigchld.patch
+Patch16:	%{name}-220015.patch
+Patch17:	%{name}-safe_finger.patch
+Patch18:	%{name}-docs.patch
 BuildRequires:	libtool
 Requires:	libwrap = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -183,8 +191,8 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та інших
 
 %prep
 %setup -q -n %{name}_%{version}
-%patch0 -p2
-%patch1 -p1
+%patch0 -p0
+#%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
@@ -194,6 +202,14 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та інших
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
 
 %build
 %{__make} linux \
