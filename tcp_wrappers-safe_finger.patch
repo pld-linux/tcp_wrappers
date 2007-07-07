@@ -1,0 +1,20 @@
+diff -urN tcp_wrappers_7.6.orig/safe_finger.c tcp_wrappers_7.6/safe_finger.c
+--- tcp_wrappers_7.6.orig/safe_finger.c	Mon Dec 13 13:58:15 1999
++++ tcp_wrappers_7.6/safe_finger.c	Mon Dec 13 14:15:09 1999
+@@ -31,14 +31,14 @@
+ 
+ /* Local stuff */
+ 
+-char    path[] = "PATH=/bin:/usr/bin:/usr/ucb:/usr/bsd:/etc:/usr/etc:/usr/sbin";
++char    path[] = "PATH=/bin:/usr/bin:/sbin:/usr/sbin";
+ 
+ #define	TIME_LIMIT	60		/* Do not keep listinging forever */
+ #define	INPUT_LENGTH	100000		/* Do not keep listinging forever */
+ #define	LINE_LENGTH	128		/* Editors can choke on long lines */
+ #define	FINGER_PROGRAM	"finger"	/* Most, if not all, UNIX systems */
+ #define	UNPRIV_NAME	"nobody"	/* Preferred privilege level */
+-#define	UNPRIV_UGID	32767		/* Default uid and gid */
++#define	UNPRIV_UGID	99		/* Default uid and gid */
+ 
+ int     finger_pid;
+ 

@@ -1,0 +1,56 @@
+diff -urN tcp_wrappers_7.6.orig/README tcp_wrappers_7.6/README
+--- tcp_wrappers_7.6.orig/README	Mon Dec 13 13:58:15 1999
++++ tcp_wrappers_7.6/README	Mon Dec 13 14:09:31 1999
+@@ -169,7 +169,7 @@
+ 2) The advanced way: leave the network daemons alone and modify the
+    inetd configuration file.  For example, an entry such as:
+ 
+-     tftp  dgram  udp  wait  root  /usr/etc/tcpd  in.tftpd -s /tftpboot
++     tftp  dgram  udp  wait  root  /usr/sbin/tcpd  in.tftpd -s /tftpboot
+ 
+    When a tftp request arrives, inetd will run the wrapper program
+    (tcpd) with a process name `in.tftpd'.  This is the name that the
+@@ -821,12 +821,12 @@
+ Then perform the following edits on the inetd configuration file
+ (usually /etc/inetd.conf or /etc/inet/inetd.conf):
+ 
+-    finger  stream  tcp     nowait  nobody  /usr/etc/in.fingerd     in.fingerd
+-                                            ^^^^^^^^^^^^^^^^^^^
++    finger  stream  tcp     nowait  nobody  /usr/sbin/in.fingerd     in.fingerd
++                                            ^^^^^^^^^^^^^^^^^^^^
+ becomes:
+ 
+-    finger  stream  tcp     nowait  nobody  /usr/etc/tcpd           in.fingerd
+-                                            ^^^^^^^^^^^^^
++    finger  stream  tcp     nowait  nobody  /usr/sbin/tcpd           in.fingerd
++                                            ^^^^^^^^^^^^^^
+ Send a `kill -HUP' to the inetd process to make the change effective.
+ Some IRIX inetd implementations require that you first disable the
+ finger service (comment out the finger service and `kill -HUP' the
+@@ -873,7 +873,7 @@
+ Instead you can specify, in the inetd configuration file, an absolute
+ path name for the daemon process name.  For example,
+ 
+-    ntalk   dgram   udp     wait    root    /usr/etc/tcpd /usr/local/lib/ntalkd
++    ntalk   dgram   udp     wait    root    /usr/sbin/tcpd /usr/sbin/in.ntalkd
+ 
+ When the daemon process name is an absolute path name, tcpd ignores the
+ value of the REAL_DAEMON_DIR constant, and uses the last path component
+@@ -940,7 +940,7 @@
+ you can look up the name from the inetd configuration file. Coming back
+ to the tftp example in the tutorial section above:
+ 
+-    tftp  dgram  udp  wait  root  /usr/etc/tcpd  in.tftpd -s /tftpboot
++    tftp  dgram  udp  wait  root  /usr/sbin/tcpd  in.tftpd -s /tftpboot
+ 
+ This entry causes the inetd to run the wrapper program (tcpd) with a
+ process name `in.tftpd'.  This is the name that the wrapper will use
+@@ -976,7 +976,7 @@
+ listener, but it should be registered in the inetd configuration file.
+ For example:
+ 
+-    smtp    stream  tcp     nowait  root    /usr/etc/tcpd /usr/lib/sendmail -bs
++    smtp    stream  tcp     nowait  root    /usr/sbin/tcpd /usr/lib/sendmail -bs
+ 
+ You will still need to run one sendmail background process to handle
+ queued-up outgoing mail. A command like:
