@@ -15,7 +15,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
 -	LIBS= RANLIB=ranlib ARFLAGS=rv AUX_OBJ=setenv.o \
 -	NETGROUP= TLI= EXTRA_CFLAGS="-DHAVE_WEAKSYMS -DBROKEN_SO_LINGER -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len" all
-+	LIBS="-lnsl" RANLIB=ranlib ARFLAGS=rv AUX_OBJ= NETGROUP="-DNETGROUP" TLI= \
++	LIBS= RANLIB=ranlib ARFLAGS=rv AUX_OBJ= NETGROUP= TLI= \
 +	EXTRA_CFLAGS="$(RPM_OPT_FLAGS) -DHAVE_STRERROR -DHAVE_WEAKSYMS -DBROKEN_SO_LINGER -DINET6=1 -Dss_family=__ss_family -Dss_len=__ss_len" all
  
  linux-old:
