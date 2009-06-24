@@ -271,6 +271,7 @@ fi
 %files -n libwrap-libs
 %defattr(644,root,root,755)
 %attr(755,root,root) /%{_lib}/libwrap.so.*.*
+%attr(755,root,root) %ghost /%{_lib}/libwrap.so.0
 
 %files -n libwrap-devel
 %defattr(644,root,root,755)
