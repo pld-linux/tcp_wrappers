@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	TCP süreçleri için güvenlik sarmalayıcısı
 Summary(uk.UTF-8):	Security wrapper для tcp-демонів
 Name:		tcp_wrappers
 Version:	7.6
-Release:	43
+Release:	44
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -271,7 +271,7 @@ fi
 %files -n libwrap-libs
 %defattr(644,root,root,755)
 %attr(755,root,root) /%{_lib}/libwrap.so.*.*
-%attr(755,root,root) %ghost /%{_lib}/libwrap.so.0
+%attr(755,root,root) %ghost %{_libdir}/libwrap.so.0
 
 %files -n libwrap-devel
 %defattr(644,root,root,755)
