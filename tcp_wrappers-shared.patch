@@ -26,9 +26,9 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  SHELL	= /bin/sh
 -.c.o:;	$(CC) $(CFLAGS) -c $*.c
-+.c.o:;	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $*.c
++.c.o:;	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) -c $*.c
 +
-+%.lo:;	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $*.c
++%.lo:;	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) -c $*.c
  
  CFLAGS	= -O -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
  	$(BUGS) $(SYSTYPE) $(AUTH) $(UMASK) \
@@ -65,35 +65,35 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  	rm -f $(LIB)
 -	$(AR) $(ARFLAGS) $(LIB) $(LIB_OBJ)
 -	-$(RANLIB) $(LIB)
-+	$(LIBTOOL) --mode=link $(CC) -o $(LIB) $(LIB_OBJ) $(LDFLAGS) $(LIBS) -rpath $(LIBDIR)
++	$(LIBTOOL) --tag=CC --mode=link $(CC) -o $(LIB) $(LIB_OBJ) $(LDFLAGS) $(LIBS) -rpath $(LIBDIR)
  
  tcpd:	tcpd.o $(LIB)
 -	$(CC) $(CFLAGS) -o $@ tcpd.o $(LIB) $(LIBS)
-+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ tcpd.o $(LDFLAGS) $(LIB) $(LIBS)
++	$(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -o $@ tcpd.o $(LDFLAGS) $(LIB) $(LIBS)
  
  miscd:	miscd.o $(LIB)
 -	$(CC) $(CFLAGS) -o $@ miscd.o $(LIB) $(LIBS)
-+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ miscd.o $(LDFLAGS) $(LIB) $(LIBS)
++	$(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -o $@ miscd.o $(LDFLAGS) $(LIB) $(LIBS)
  
  safe_finger: safe_finger.o $(LIB)
 -	$(CC) $(CFLAGS) -o $@ safe_finger.o $(LIB) $(LIBS)
-+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ safe_finger.o $(LDFLAGS) $(LIB) $(LIBS)
++	$(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -o $@ safe_finger.o $(LDFLAGS) $(LIB) $(LIBS)
  
  TCPDMATCH_OBJ = tcpdmatch.o fakelog.o inetcf.o scaffold.o
  
  tcpdmatch: $(TCPDMATCH_OBJ) $(LIB)
 -	$(CC) $(CFLAGS) -o $@ $(TCPDMATCH_OBJ) $(LIB) $(LIBS)
-+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ $(TCPDMATCH_OBJ) $(LDFLAGS) $(LIB) $(LIBS)
++	$(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -o $@ $(TCPDMATCH_OBJ) $(LDFLAGS) $(LIB) $(LIBS)
  
  try-from: try-from.o fakelog.o $(LIB)
 -	$(CC) $(CFLAGS) -o $@ try-from.o fakelog.o $(LIB) $(LIBS)
-+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ try-from.o fakelog.o $(LDFLAGS) $(LIB) $(LIBS)
++	$(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -o $@ try-from.o fakelog.o $(LDFLAGS) $(LIB) $(LIBS)
  
  TCPDCHK_OBJ = tcpdchk.o fakelog.o inetcf.o scaffold.o
  
  tcpdchk: $(TCPDCHK_OBJ) $(LIB)
 -	$(CC) $(CFLAGS) -o $@ $(TCPDCHK_OBJ) $(LIB) $(LIBS)
-+	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) -o $@ $(TCPDCHK_OBJ) $(LDFLAGS) $(LIB) $(LIBS)
++	$(LIBTOOL) --tag=CC --mode=link $(CC) $(CFLAGS) -o $@ $(TCPDCHK_OBJ) $(LDFLAGS) $(LIB) $(LIBS)
  
  shar:	$(KIT)
  	@shar $(KIT)
@@ -108,7 +108,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
 +	$(LIBTOOL) --mode=finish $(LIBDIR)
 +	for PROG in safe_finger tcpdchk try-from tcpd tcpdmatch ; do \
 +		$(LIBTOOL) --mode=install install -c $$PROG $(PREFIX)/sbin/$$PROG ; done
-+	install tcpd.h $(PREFIX)/include/
++	install -p tcpd.h $(PREFIX)/include/
  
  # Enable all bells and whistles for linting.
  
