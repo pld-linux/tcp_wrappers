@@ -259,14 +259,24 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc BLURB CHANGES README* DISCLAIMER Banners.Makefile
-%attr(755,root,root) %{_sbindir}/*
-%{_mandir}/man8/*
+%attr(755,root,root) %{_sbindir}/safe_finger
+%attr(755,root,root) %{_sbindir}/tcpd
+%attr(755,root,root) %{_sbindir}/tcpdchk
+%attr(755,root,root) %{_sbindir}/tcpdmatch
+%attr(755,root,root) %{_sbindir}/try-from
+%{_mandir}/man8/tcpd.8*
+%{_mandir}/man8/tcpdchk.8*
+%{_mandir}/man8/tcpdmatch.8*
 
 %files -n libwrap
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}/tcpd
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.*
-%{_mandir}/man5/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.allow
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/tcpd/hosts.deny
+%{_mandir}/man5/hosts.allow.5*
+%{_mandir}/man5/hosts.deny.5*
+%{_mandir}/man5/hosts_access.5*
+%{_mandir}/man5/hosts_options.5*
 
 %files -n libwrap-libs
 %defattr(644,root,root,755)
