@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	TCP süreçleri için güvenlik sarmalayıcısı
 Summary(uk.UTF-8):	Security wrapper для tcp-демонів
 Name:		tcp_wrappers
 Version:	7.6
-Release:	43
+Release:	45
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -225,8 +225,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/tcpd \
 	PREFIX=$RPM_BUILD_ROOT%{_prefix} \
 	LIBDIR=$RPM_BUILD_ROOT%{_libdir}
 
-mv $RPM_BUILD_ROOT%{_libdir}/libwrap.so.*.*.* $RPM_BUILD_ROOT/%{_lib}
-ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib} ; echo libwrap.so.*.*.*) \
+mv $RPM_BUILD_ROOT%{_libdir}/libwrap.so.* $RPM_BUILD_ROOT/%{_lib}
+ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib}; echo libwrap.so.*.*.*) \
         $RPM_BUILD_ROOT%{_libdir}/libwrap.so
 
 cp -p hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
