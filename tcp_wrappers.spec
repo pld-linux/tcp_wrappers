@@ -229,11 +229,11 @@ mv $RPM_BUILD_ROOT%{_libdir}/libwrap.so.*.*.* $RPM_BUILD_ROOT/%{_lib}
 ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib} ; echo libwrap.so.*.*.*) \
         $RPM_BUILD_ROOT%{_libdir}/libwrap.so
 
-install	hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
-install {hosts_access,hosts_options}.5	$RPM_BUILD_ROOT%{_mandir}/man5
-install {tcpd,tcpdchk,tcpdmatch}.8	$RPM_BUILD_ROOT%{_mandir}/man8
+cp -p hosts_access.3			$RPM_BUILD_ROOT%{_mandir}/man3
+cp -p {hosts_access,hosts_options}.5	$RPM_BUILD_ROOT%{_mandir}/man5
+cp -p {tcpd,tcpdchk,tcpdmatch}.8	$RPM_BUILD_ROOT%{_mandir}/man8
 
-install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tcpd
+cp -p %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/tcpd
 
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.allow.5
 echo ".so hosts_access.5" > $RPM_BUILD_ROOT%{_mandir}/man5/hosts.deny.5
