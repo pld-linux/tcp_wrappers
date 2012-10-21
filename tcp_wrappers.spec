@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	TCP süreçleri için güvenlik sarmalayıcısı
 Summary(uk.UTF-8):	Security wrapper для tcp-демонів
 Name:		tcp_wrappers
 Version:	7.6
-Release:	45
+Release:	46
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
