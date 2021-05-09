@@ -1,7 +1,7 @@
-diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
---- tcp_wrappers_7.6.orig/Makefile	Mon Dec 13 13:58:15 1999
-+++ tcp_wrappers_7.6/Makefile	Mon Dec 13 14:07:48 1999
-@@ -71,6 +71,7 @@
+diff -urNp -x '*.orig' tcp_wrappers_7.6.org/Makefile tcp_wrappers_7.6/Makefile
+--- tcp_wrappers_7.6.org/Makefile	2021-05-10 00:37:26.282798762 +0200
++++ tcp_wrappers_7.6/Makefile	2021-05-10 00:37:26.357798762 +0200
+@@ -71,6 +71,7 @@ what:
  #
  # HP-UX SCO Unicos
  #REAL_DAEMON_DIR=/etc/...
@@ -9,7 +9,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  # End of mandatory section
  ##########################
-@@ -150,8 +151,8 @@
+@@ -150,8 +151,8 @@ netbsd:
  
  linux:
  	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
@@ -20,7 +20,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  linux-old:
  	@make REAL_DAEMON_DIR=$(REAL_DAEMON_DIR) STYLE=$(STYLE) \
-@@ -504,7 +508,7 @@
+@@ -515,7 +516,7 @@ AR	= ar
  # Uncomment the next definition to turn on the language extensions
  # (examples: allow, deny, banners, twist and spawn).
  # 
@@ -29,7 +29,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  ################################################################
  # Optional: Changing the default disposition of logfile records
-@@ -527,7 +531,7 @@
+@@ -538,7 +539,7 @@ AR	= ar
  #
  # The LOG_XXX names below are taken from the /usr/include/syslog.h file.
  
@@ -38,7 +38,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  # The syslog priority at which successful connections are logged.
  
-@@ -544,7 +548,7 @@
+@@ -555,7 +556,7 @@ SEVERITY= LOG_INFO	# LOG_INFO is normall
  # and with Solaris < 2.4. APPEND_DOT will not work with hostnames taken
  # from /etc/hosts or from NIS maps. It does work with DNS through NIS.
  #
@@ -47,7 +47,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  ##################################################
  # Optional: Always attempt remote username lookups
-@@ -564,7 +568,7 @@
+@@ -575,7 +576,7 @@ SEVERITY= LOG_INFO	# LOG_INFO is normall
  # still do selective username lookups as documented in the hosts_access.5
  # and hosts_options.5 manual pages (`nroff -man' format).
  #
@@ -56,7 +56,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  #
  # The default username lookup timeout is 10 seconds. This may not be long
  # enough for slow hosts or networks, but is enough to irritate PC users.
-@@ -603,7 +607,7 @@
+@@ -614,7 +615,7 @@ ACCESS	= -DHOSTS_ACCESS
  # look for access control information. Watch out for the quotes and
  # backslashes when you make changes.
  
@@ -65,7 +65,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  ####################################################
  # Optional: dealing with host name/address conflicts
-@@ -623,7 +627,7 @@
+@@ -634,7 +635,7 @@ TABLES	= -DHOSTS_DENY=\"/etc/hosts.deny\
  # Paranoid mode implies hostname lookup. In order to disable hostname
  # lookups altogether, see the next section.
  
@@ -74,7 +74,7 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  ########################################
  # Optional: turning off hostname lookups
-@@ -636,7 +640,7 @@
+@@ -647,7 +648,7 @@ PARANOID= -DPARANOID
  # In order to perform selective hostname lookups, disable paranoid
  # mode (see previous section) and comment out the following definition.
  
@@ -83,18 +83,18 @@ diff -urN tcp_wrappers_7.6.orig/Makefile tcp_wrappers_7.6/Makefile
  
  #############################################
  # Optional: Turning on host ADDRESS checking
-@@ -661,7 +661,7 @@
- #
- # Uncomment the following macro definition if your getsockopt() is OK.
+@@ -673,7 +674,7 @@ HOSTNAME= -DALWAYS_HOSTNAME
+ # source-routed traffic in the kernel. Examples: 4.4BSD derivatives,
+ # Solaris 2.x, and Linux. See your system documentation for details.
  #
 -# KILL_OPT= -DKILL_IP_OPTIONS
 +KILL_OPT= -DKILL_IP_OPTIONS
  
  ## End configuration options
  ############################
-@@ -671,7 +672,7 @@
+@@ -685,7 +686,7 @@ SHELL	= /bin/sh
  
- %.lo:;	$(LIBTOOL) --mode=compile $(CC) $(CFLAGS) -c $*.c
+ %.lo:;	$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) -c $*.c
  
 -CFLAGS	= -O -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
 +CFLAGS	= -DFACILITY=$(FACILITY) $(ACCESS) $(PARANOID) $(NETGROUP) \
