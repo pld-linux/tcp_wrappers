@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	TCP süreçleri için güvenlik sarmalayıcısı
 Summary(uk.UTF-8):	Security wrapper для tcp-демонів
 Name:		tcp_wrappers
 Version:	7.6
-Release:	48
+Release:	49
 License:	distributable
 Group:		Networking/Admin
 Source0:	ftp://ftp.porcupine.org/pub/security/%{name}_%{version}.tar.gz
@@ -212,7 +212,7 @@ SYSTAT, FINGER, FTP, TELNET, RLOGIN, RSH, EXEC, TFTP, TALK та інших
 	CC="%{__cc}" \
 	PREFIX=%{_prefix} \
 	LIBDIR=%{_libdir} \
-	RPM_OPT_FLAGS="%{rpmcflags}" \
+	RPM_OPT_FLAGS="%{rpmcflags} -std=gnu89" \
 	LDFLAGS="%{rpmldflags}"
 
 %install
